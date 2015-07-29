@@ -16,7 +16,9 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     private var allUsers = [User]()
     private var filteredUsers = [User]()
 
-    @IBOutlet var searchField : UISearchBar!
+    @IBOutlet weak var constraintSearchBarToNavBar: NSLayoutConstraint!
+    @IBOutlet var buttonCheckout: UIButton!
+    @IBOutlet var searchField: UISearchBar!
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -31,12 +33,29 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         
         let device = Device.sharedInstance
         
+        self.styleButton()
         self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func styleButton() {
+        self.buttonCheckout.layer.cornerRadius = 5.0
+    }
+    
+    func showButton(show: Bool) {
+        self.constraintSearchBarToNavBar.constant = show ? 36.0 : 0.0
+        
+        UIView.animateWithDuration(0.2, animations: {
+            self.buttonCheckout.alpha = show ? 1.0 : 0.0
+            self.view.layoutIfNeeded()
+            }, completion: {
+                (value: Bool) in
+                self.buttonCheckout.hidden = !show
+        })
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -59,17 +78,20 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         let row = indexPath.row
         let selectedUser = self.searchActive ? self.filteredUsers[row] : self.allUsers[row]
         
+        showButton(true)
+        
         println(selectedUser.fullName())
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.searchField.resignFirstResponder()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-//    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-//        self.searchActive = true
-//    }
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        showButton(false)
+    }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         self.searchActive = false
