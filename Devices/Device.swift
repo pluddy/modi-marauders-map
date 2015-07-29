@@ -35,9 +35,10 @@ class Device {
     private var status: Checked
     private var location: Zone
     private var user: User?
+    private var beacons = [Beacon]()
     private var timeStampChecked: NSDate?
     private var timeStampZone: NSDate?
-    
+        
     class var sharedInstance : Device {
         struct Static {
             static let instance : Device = Device()

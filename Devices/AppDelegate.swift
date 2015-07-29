@@ -13,18 +13,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
 
     var window: UIWindow?
 
-    let beaconManager = ESTBeaconManager()
+    let NSNotificationDeviceZoneDidChange = "NSNotificationDeviceZoneDidChange"
+    let beaconManagerCart = ESTBeaconManager()
+    let beaconManagerWest = ESTBeaconManager()
+    let beaconManagerEast = ESTBeaconManager()
     let NotificationCheckOutCategoryId = "CHECK_IN"
     let NotificationCheckOutActionId = "ACTION_CHECK_IN"
+    var beaconWest = false
+    var beaconCart = false
+    var beaconEast = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        self.beaconManager.delegate = self
+        self.beaconManagerCart.delegate = self
+        self.beaconManagerWest.delegate = self
+        self.beaconManagerEast.delegate = self
         
-        self.beaconManager.requestAlwaysAuthorization()
+        self.beaconManagerCart.requestAlwaysAuthorization()
+        self.beaconManagerWest.requestAlwaysAuthorization()
+        self.beaconManagerEast.requestAlwaysAuthorization()
         
-        self.beaconManager.startMonitoringForRegion(CLBeaconRegion(
+        self.beaconManagerCart.startMonitoringForRegion(CLBeaconRegion(
             proximityUUID: NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!,
-            major: 40435, minor: 8969, identifier: "Device Cart"))
+            major: 31206, minor: 28466, identifier: "mintWest"))
+        
+        self.beaconManagerWest.startMonitoringForRegion(CLBeaconRegion(
+            proximityUUID: NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!,
+            major: 18712, minor: 42723, identifier: "blueberryCart"))
+        
+        self.beaconManagerEast.startMonitoringForRegion(CLBeaconRegion(
+            proximityUUID: NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!,
+            major: 40435, minor: 8969, identifier: "iceEast"))
         
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil))
         
@@ -59,18 +77,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func beaconManager(manager: AnyObject!, didEnterRegion region: CLBeaconRegion!) {
+    func beaconManagerCart(manager: AnyObject!, didEnterRegion region: CLBeaconRegion!) {
+        beaconCart = true
         let notification = UILocalNotification()
         notification.soundName = "Hello"
         notification.alertBody = "✅Checked in! Thanks!"
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }
     
-    func beaconManager(manager: AnyObject!, didExitRegion region: CLBeaconRegion!) {
+    func beaconManagerCart(manager: AnyObject!, didExitRegion region: CLBeaconRegion!) {
+        beaconCart = false
         let notification = UILocalNotification()
         notification.alertBody = "Please Check Out this Device"
         notification.alertAction = "check out"
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+    }
+    
+    func beaconManagerEast(manager: AnyObject!, didEnterRegion region: CLBeaconRegion!) {
+        beaconEast = true
+    }
+    
+    func beaconManagerEast(manager: AnyObject!, didExitRegion region: CLBeaconRegion!) {
+        beaconEast = false
+    }
+    
+    func beaconManagerWest(manager: AnyObject!, didEnterRegion region: CLBeaconRegion!) {
+        beaconWest = true
+    }
+    
+    func beaconManagerWest(manager: AnyObject!, didExitRegion region: CLBeaconRegion!) {
+        beaconWest = false
+    }
+    
+    func zoneFromBeacons() -> Zone{
+        
+        if (beaconCart) {
+            return Zone.Middle
+        } else if (beaconWest && beaconEast) {
+            return Zone.Cart
+        } else if (!beaconWest && beaconEast) {
+            return Zone.East
+        } else if (beaconWest && !beaconEast) {
+            return Zone.West
+        } else {
+            return Zone.Unknown
+        }
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
