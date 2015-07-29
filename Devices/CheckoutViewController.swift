@@ -57,7 +57,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row
-        let selectedUser = self.searchActive ? self.allUsers[row] : self.filteredUsers[row]
+        let selectedUser = self.searchActive ? self.filteredUsers[row] : self.allUsers[row]
         
         println(selectedUser.fullName())
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -94,19 +94,5 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.searchField.resignFirstResponder()
     }
-    
-//    func dataForPopoverInTextField(textfield: MPGTextField_Swift) -> [Dictionary<String, AnyObject>]
-//    {
-//        return users
-//    }
-//    
-//    func textFieldShouldSelect(textField: MPGTextField_Swift) -> Bool{
-//        return true
-//    }
-//    
-//    func textFieldDidEndEditing(textField: MPGTextField_Swift, withSelection data: Dictionary<String,AnyObject>){
-//        print("Dictionary received = \(data)")
-//    }
-    
 }
 
