@@ -57,8 +57,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Devices/ViewController.swift"
-            timestampString = "459822122.31033"
+            filePath = "Devices/CheckoutViewController.swift"
+            timestampString = "459877809.367189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
@@ -80,6 +80,22 @@
             startingLineNumber = "164"
             endingLineNumber = "164"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Devices/CheckService.swift"
+            timestampString = "459873190.208737"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "447"
+            endingLineNumber = "447"
+            landmarkName = "rawString(encoding:options:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

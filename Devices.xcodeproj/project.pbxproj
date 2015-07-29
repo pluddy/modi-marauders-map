@@ -11,6 +11,9 @@
 		46B936A1D03497B39C0A3005 /* libPods-DevicesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A997469A98E9B33ABCC366 /* libPods-DevicesTests.a */; };
 		8AE8172EF610F6CB231131F4 /* libPods-Devices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2DC4B9678D3FC5D760CAE0 /* libPods-Devices.a */; };
 		B006794A1B690EEF00D467C0 /* CheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00679491B690EEF00D467C0 /* CheckService.swift */; };
+		B008B7821B6922BE001BC4CC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7811B6922BE001BC4CC /* User.swift */; };
+		B008B7851B693301001BC4CC /* CheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7841B693301001BC4CC /* CheckinViewController.swift */; };
+		B008B7871B693422001BC4CC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7861B693422001BC4CC /* SettingsViewController.swift */; };
 		B0A9A2CA1B6841490093DB80 /* MPGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A9A2C91B6841490093DB80 /* MPGTextField.swift */; };
 		B0A9A2CC1B684C870093DB80 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B0A9A2CB1B684C870093DB80 /* Fonts */; };
 		B0A9A2D41B6856B70093DB80 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A9A2D31B6856B70093DB80 /* NotificationCenter.framework */; };
@@ -19,7 +22,7 @@
 		B0A9A2DE1B6856B70093DB80 /* Devices Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B0A9A2D21B6856B70093DB80 /* Devices Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B0A9A2E41B68897F0093DB80 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A9A2E31B68897F0093DB80 /* Device.swift */; };
 		B0BE594E1B66F267001562AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BE594D1B66F267001562AA /* AppDelegate.swift */; };
-		B0BE59501B66F267001562AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BE594F1B66F267001562AA /* ViewController.swift */; };
+		B0BE59501B66F267001562AA /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BE594F1B66F267001562AA /* CheckoutViewController.swift */; };
 		B0BE59531B66F267001562AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0BE59511B66F267001562AA /* Main.storyboard */; };
 		B0BE59551B66F267001562AA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0BE59541B66F267001562AA /* Images.xcassets */; };
 		B0BE59581B66F267001562AA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0BE59561B66F267001562AA /* LaunchScreen.xib */; };
@@ -65,6 +68,9 @@
 		A0A997469A98E9B33ABCC366 /* libPods-DevicesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DevicesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD2DC4B9678D3FC5D760CAE0 /* libPods-Devices.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Devices.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00679491B690EEF00D467C0 /* CheckService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckService.swift; sourceTree = "<group>"; };
+		B008B7811B6922BE001BC4CC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B008B7841B693301001BC4CC /* CheckinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinViewController.swift; sourceTree = "<group>"; };
+		B008B7861B693422001BC4CC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B080B1401B671DE70096FB7F /* ObjCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
 		B0A9A2C91B6841490093DB80 /* MPGTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPGTextField.swift; sourceTree = "<group>"; };
 		B0A9A2CB1B684C870093DB80 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
@@ -77,7 +83,7 @@
 		B0BE59481B66F267001562AA /* Devices.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Devices.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0BE594C1B66F267001562AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0BE594D1B66F267001562AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B0BE594F1B66F267001562AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B0BE594F1B66F267001562AA /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		B0BE59521B66F267001562AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B0BE59541B66F267001562AA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B0BE59571B66F267001562AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -142,6 +148,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B008B7831B6924D1001BC4CC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B0A9A2E31B68897F0093DB80 /* Device.swift */,
+				B008B7811B6922BE001BC4CC /* User.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		B065D70A1B684C1E00802B83 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,8 +203,10 @@
 			children = (
 				B0BE594D1B66F267001562AA /* AppDelegate.swift */,
 				B0A9A2C91B6841490093DB80 /* MPGTextField.swift */,
-				B0BE594F1B66F267001562AA /* ViewController.swift */,
-				B0A9A2E31B68897F0093DB80 /* Device.swift */,
+				B0BE594F1B66F267001562AA /* CheckoutViewController.swift */,
+				B008B7841B693301001BC4CC /* CheckinViewController.swift */,
+				B008B7861B693422001BC4CC /* SettingsViewController.swift */,
+				B008B7831B6924D1001BC4CC /* Models */,
 				B00679491B690EEF00D467C0 /* CheckService.swift */,
 				B0BE59511B66F267001562AA /* Main.storyboard */,
 				B0BE59541B66F267001562AA /* Images.xcassets */,
@@ -467,9 +484,12 @@
 			files = (
 				B006794A1B690EEF00D467C0 /* CheckService.swift in Sources */,
 				B0A9A2CA1B6841490093DB80 /* MPGTextField.swift in Sources */,
-				B0BE59501B66F267001562AA /* ViewController.swift in Sources */,
+				B008B7821B6922BE001BC4CC /* User.swift in Sources */,
+				B008B7851B693301001BC4CC /* CheckinViewController.swift in Sources */,
+				B0BE59501B66F267001562AA /* CheckoutViewController.swift in Sources */,
 				B0BE594E1B66F267001562AA /* AppDelegate.swift in Sources */,
 				B0A9A2E41B68897F0093DB80 /* Device.swift in Sources */,
+				B008B7871B693422001BC4CC /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,6 +667,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Devices/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hudl.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -661,6 +682,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Devices/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hudl.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

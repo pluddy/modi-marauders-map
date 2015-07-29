@@ -8,17 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController, MPGTextFieldDelegate {
+class CheckoutViewController: UIViewController, UISearchBarDelegate {
     
     var users = [Dictionary<String, AnyObject>()]
 
-    @IBOutlet var userField : MPGTextField_Swift!
+    @IBOutlet var searchField : UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         users[0] = ["0":"Patrick","1":"Pat","2":"PLuddy"]
-        userField = MPGTextField_Swift()
-        userField.popoverBackgroundColor = UIColor.redColor();
+        
+        let device = Device.sharedInstance
         // Do any additional setup after loading the view, typically from a nib.
     }
 

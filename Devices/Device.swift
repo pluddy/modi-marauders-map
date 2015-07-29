@@ -9,39 +9,46 @@
 import Foundation
 import UIKit
 
-extension UIDevice {
-    enum Checked {
-        case In
-        case Out
-    }
-    enum Zone {
-        case West
-        case Middle
-        case East
-        case Cart
-        case Unknown
-    }
-    
-
+enum Checked {
+    case In
+    case Out
 }
 
-class Device {
-    var status: UIDevice.Checked
-    var location: UIDevice.Zone
-    var user: String
-    var timeStamp: NSDate
-    
-    init(checked: UIDevice.Checked, location: UIDevice.Zone, user: String, time: NSDate){
-        self.status = checked
-        self.location = location
-        self.user = user
-        self.timeStamp = time
-    }
-    
+enum Zone {
+    case West
+    case Middle
+    case East
+    case Cart
+    case Unknown
+}
+
+extension NSDate {
     func timeAsString() -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        return dateFormatter.stringFromDate(timeStamp)
+        return dateFormatter.stringFromDate(self)
     }
+}
+
+class Device {
+    private var status: Checked
+    private var location: Zone
+    private var user: User?
+    private var timeStampChecked: NSDate?
+    private var timeStampZone: NSDate?
+    
+    class var sharedInstance : Device {
+        struct Static {
+            static let instance : Device = Device()
+        }
+        return Static.instance
+    }
+    
+    init(){
+        self.status = Checked.In
+        self.location = Zone.Unknown
+    }
+    
+    
 }
