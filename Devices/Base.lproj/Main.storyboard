@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBk-Dt-c4P">
-                                <rect key="frame" x="225" y="289" width="151" height="21"/>
+                                <rect key="frame" x="225" y="64" width="151" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="151" id="38S-VJ-2rk"/>
                                     <constraint firstAttribute="height" constant="21" id="9T4-Kd-Wpm"/>
@@ -63,12 +63,18 @@
                                 </segments>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsV-U5-S0P">
-                                <rect key="frame" x="16" y="31" width="105" height="21"/>
+                                <rect key="frame" x="16" y="31" width="105" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="105" id="aM5-lH-mYr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pS-DV-VyR">
+                                <rect key="frame" x="16" y="93" width="568" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -77,13 +83,16 @@
                             <constraint firstItem="QsV-U5-S0P" firstAttribute="top" secondItem="7EC-Gl-MGx" secondAttribute="bottom" constant="11" id="0aW-9p-X93"/>
                             <constraint firstItem="hmq-Qf-pnF" firstAttribute="top" secondItem="WMn-wU-NIV" secondAttribute="bottom" constant="20" id="B5r-jc-a41"/>
                             <constraint firstAttribute="centerX" secondItem="WMn-wU-NIV" secondAttribute="centerX" id="C8J-Ka-j7G"/>
-                            <constraint firstAttribute="centerY" secondItem="KBk-Dt-c4P" secondAttribute="centerY" id="FGJ-Eo-Ng3"/>
+                            <constraint firstAttribute="centerY" secondItem="KBk-Dt-c4P" secondAttribute="centerY" constant="225.5" id="FGJ-Eo-Ng3"/>
                             <constraint firstItem="FFp-6j-Jnx" firstAttribute="leading" secondItem="QsV-U5-S0P" secondAttribute="trailing" constant="8" symbolic="YES" id="MBn-R3-3H9"/>
                             <constraint firstItem="QsV-U5-S0P" firstAttribute="leading" secondItem="DUz-Og-26h" secondAttribute="leadingMargin" id="cDV-4f-Vlo"/>
                             <constraint firstAttribute="centerX" secondItem="KBk-Dt-c4P" secondAttribute="centerX" id="lqT-rs-gDf"/>
                             <constraint firstItem="FFp-6j-Jnx" firstAttribute="top" secondItem="7EC-Gl-MGx" secondAttribute="bottom" constant="8" id="uHW-ch-UEh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="locationLabel" destination="3pS-DV-VyR" id="yEP-zp-VFD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNv-hU-S4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -282,6 +291,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="sS1-8q-lqD"/>
+        <segue reference="DpB-vI-Ger"/>
     </inferredMetricsTieBreakers>
 </document>
