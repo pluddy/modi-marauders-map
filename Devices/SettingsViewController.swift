@@ -11,6 +11,9 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    @IBAction func DismissSettings(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         

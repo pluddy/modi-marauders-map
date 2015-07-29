@@ -9,6 +9,7 @@
         <mutableArray key="TradeGothicLT.ttf">
             <string>TradeGothicLT</string>
             <string>TradeGothicLT</string>
+            <string>TradeGothicLT</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -34,17 +35,58 @@
                                 <color key="textColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMn-wU-NIV">
+                                <rect key="frame" x="256" y="550" width="88" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="CzF-df-jz3"/>
+                                    <constraint firstAttribute="width" constant="88" id="TM3-zf-Ees"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TradeGothicLT" family="Trade Gothic LT" pointSize="21"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="DismissSettings:" destination="2s3-kc-Igt" eventType="touchUpInside" id="Wno-WE-IuR"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FFp-6j-Jnx">
+                                <rect key="frame" x="129" y="28" width="183" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="183" id="Jts-RC-Bus"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="White"/>
+                                    <segment title="Black"/>
+                                    <segment title="Gold"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsV-U5-S0P">
+                                <rect key="frame" x="16" y="31" width="105" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="105" id="aM5-lH-mYr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="QsV-U5-S0P" firstAttribute="top" secondItem="7EC-Gl-MGx" secondAttribute="bottom" constant="11" id="0aW-9p-X93"/>
+                            <constraint firstItem="hmq-Qf-pnF" firstAttribute="top" secondItem="WMn-wU-NIV" secondAttribute="bottom" constant="20" id="B5r-jc-a41"/>
+                            <constraint firstAttribute="centerX" secondItem="WMn-wU-NIV" secondAttribute="centerX" id="C8J-Ka-j7G"/>
                             <constraint firstAttribute="centerY" secondItem="KBk-Dt-c4P" secondAttribute="centerY" id="FGJ-Eo-Ng3"/>
+                            <constraint firstItem="FFp-6j-Jnx" firstAttribute="leading" secondItem="QsV-U5-S0P" secondAttribute="trailing" constant="8" symbolic="YES" id="MBn-R3-3H9"/>
+                            <constraint firstItem="QsV-U5-S0P" firstAttribute="leading" secondItem="DUz-Og-26h" secondAttribute="leadingMargin" id="cDV-4f-Vlo"/>
                             <constraint firstAttribute="centerX" secondItem="KBk-Dt-c4P" secondAttribute="centerX" id="lqT-rs-gDf"/>
+                            <constraint firstItem="FFp-6j-Jnx" firstAttribute="top" secondItem="7EC-Gl-MGx" secondAttribute="bottom" constant="8" id="uHW-ch-UEh"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNv-hU-S4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="636" y="-413"/>
+            <point key="canvasLocation" x="984" y="-369"/>
         </scene>
         <!--Checkout View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -71,7 +113,7 @@
                                         <barButtonItem key="rightBarButtonItem" title="Settings" id="lrD-at-Nby">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="2s3-kc-Igt" kind="presentation" modalTransitionStyle="flipHorizontal" id="sS1-8q-lqD"/>
+                                                <segue destination="2s3-kc-Igt" kind="presentation" id="sS1-8q-lqD"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -137,7 +179,7 @@
                                         <barButtonItem key="rightBarButtonItem" title="Settings" id="f6I-ak-1fo">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="2s3-kc-Igt" kind="presentation" modalTransitionStyle="flipHorizontal" id="DpB-vI-Ger"/>
+                                                <segue destination="2s3-kc-Igt" kind="presentation" id="DpB-vI-Ger"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -187,6 +229,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DpB-vI-Ger"/>
+        <segue reference="sS1-8q-lqD"/>
     </inferredMetricsTieBreakers>
 </document>
