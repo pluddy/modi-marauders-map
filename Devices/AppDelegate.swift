@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     let NotificationCheckOutCategoryId = "CHECK_IN"
     let NotificationCheckOutActionId = "ACTION_CHECK_IN"
     
+    var beaconCart = false
+    var beaconWest = false
+    var beaconEast = false
+    
     func newRootViewController(vc: UIViewController) {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let storyboard = UIStoryboard.mainStoryboard()
