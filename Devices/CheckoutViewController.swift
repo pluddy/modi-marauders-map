@@ -67,15 +67,17 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         return 1
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        self.searchActive = true
-    }
+//    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+//        self.searchActive = true
+//    }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         self.searchActive = false
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchActive = true
+        
         self.filteredUsers = self.allUsers.filter({ (user) -> Bool in
             let tmp: String = user.fullName()
             if let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch) {
@@ -83,7 +85,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
             }
             return false
         })
-        if(self.filteredUsers.count == 0){
+        if(self.filteredUsers.count == 0 || searchText.isEmpty){
             searchActive = false;
         } else {
             searchActive = true;

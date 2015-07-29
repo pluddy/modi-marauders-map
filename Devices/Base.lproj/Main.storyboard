@@ -122,15 +122,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Your Name" translatesAutoresizingMaskIntoConstraints="NO" id="G6y-Ua-bvW">
-                                <rect key="frame" x="16" y="64" width="568" height="44"/>
-                                <color key="tintColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="z0q-2l-IYL"/>
-                                </connections>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fpq-OG-iCA">
                                 <rect key="frame" x="16" y="108" width="568" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -156,6 +147,15 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="GGl-oj-pYa"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Your Name" translatesAutoresizingMaskIntoConstraints="NO" id="G6y-Ua-bvW">
+                                <rect key="frame" x="16" y="64" width="568" height="44"/>
+                                <color key="tintColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="z0q-2l-IYL"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
