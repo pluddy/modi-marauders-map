@@ -50,5 +50,20 @@ class Device {
         self.location = Zone.Unknown
     }
     
+    func setUser(user: User) {
+        self.user = user
+    }
     
+    func getUser() -> User? {
+        return self.user
+    }
+    
+    func setStatus(checked: Checked) {
+        self.status = checked
+        self.timeStampChecked = NSDate()
+    }
+    
+    func getStatus() -> Checked {
+        return self.status
+    }
 }
