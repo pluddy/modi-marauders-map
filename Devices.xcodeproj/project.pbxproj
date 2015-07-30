@@ -19,6 +19,7 @@
 		B008B7961B6AA07F001BC4CC /* settings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B008B7951B6AA07F001BC4CC /* settings-icon.png */; };
 		B008B79E1B6ABBE9001BC4CC /* CheckIntoCheckOutSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B79A1B6ABBE9001BC4CC /* CheckIntoCheckOutSegue.swift */; };
 		B008B79F1B6ABBE9001BC4CC /* CheckOuttoCheckInSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B79B1B6ABBE9001BC4CC /* CheckOuttoCheckInSegue.swift */; };
+		B008B7A81B6AC8DA001BC4CC /* Hudl_Devices.png in Resources */ = {isa = PBXBuildFile; fileRef = B008B7A71B6AC8DA001BC4CC /* Hudl_Devices.png */; };
 		B0A9A2CC1B684C870093DB80 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B0A9A2CB1B684C870093DB80 /* Fonts */; };
 		B0A9A2D41B6856B70093DB80 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A9A2D31B6856B70093DB80 /* NotificationCenter.framework */; };
 		B0A9A2D71B6856B70093DB80 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A9A2D61B6856B70093DB80 /* TodayViewController.swift */; };
@@ -80,6 +81,7 @@
 		B008B7951B6AA07F001BC4CC /* settings-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-icon.png"; sourceTree = "<group>"; };
 		B008B79A1B6ABBE9001BC4CC /* CheckIntoCheckOutSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckIntoCheckOutSegue.swift; sourceTree = "<group>"; };
 		B008B79B1B6ABBE9001BC4CC /* CheckOuttoCheckInSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOuttoCheckInSegue.swift; sourceTree = "<group>"; };
+		B008B7A71B6AC8DA001BC4CC /* Hudl_Devices.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hudl_Devices.png; sourceTree = "<group>"; };
 		B080B1401B671DE70096FB7F /* ObjCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
 		B0A9A2CB1B684C870093DB80 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		B0A9A2D21B6856B70093DB80 /* Devices Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Devices Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +178,7 @@
 		B008B78A1B6A7C1C001BC4CC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B008B7A71B6AC8DA001BC4CC /* Hudl_Devices.png */,
 				B008B7951B6AA07F001BC4CC /* settings-icon.png */,
 				B008B7911B6AA06E001BC4CC /* Hudl_Huddle-W.png */,
 				B008B7921B6AA06E001BC4CC /* Hudl_Huddle.png */,
@@ -406,6 +409,7 @@
 			files = (
 				B0BE59531B66F267001562AA /* Main.storyboard in Resources */,
 				B0BE59581B66F267001562AA /* LaunchScreen.xib in Resources */,
+				B008B7A81B6AC8DA001BC4CC /* Hudl_Devices.png in Resources */,
 				B0BE59551B66F267001562AA /* Images.xcassets in Resources */,
 				B008B7961B6AA07F001BC4CC /* settings-icon.png in Resources */,
 				B008B7931B6AA06E001BC4CC /* Hudl_Huddle-W.png in Resources */,

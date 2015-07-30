@@ -93,17 +93,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     }
     
     func beaconManager(manager: AnyObject!, didEnterRegion region: CLBeaconRegion!) {
+        var newZone: Zone
         switch(region.identifier){
         case "blueberryCart":
-            beaconCart = true
+            //Device Entered cart: check in prompt
+            var notification = UILocalNotification()
+            notification.alertBody = "";
+            newZone = Zone.Cart
             println("Entered Blueberry Cart Zone")
             break
         case "iceEast":
-            beaconEast = true
+            newZone = Zone.East
             println("Entered Ice East Zone")
             break
         case "mintWest":
-            beaconWest = true
+            newZone = Zone.West
             println("Entered Mint West Zone")
             break
         default:
@@ -115,15 +119,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     func beaconManager(manager: AnyObject!, didExitRegion region: CLBeaconRegion!) {
         switch(region.identifier){
         case "blueberryCart":
-            beaconCart = false
+            //Device Left Cart: check out prompt
             println("Exited Blueberry Cart Zone")
             break
         case "iceEast":
-            beaconEast = false
             println("Exited Ice East Zone")
             break
         case "mintWest":
-            beaconWest = false
             println("Exited Mint West Zone")
             break
         default:
@@ -152,24 +154,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
         UIApplication.sharedApplication().openURL(NSURL(string: "http://www.github.com")!)
-    }
-    
-    func registerForNotification() {
-        let checkoutAction = UIMutableUserNotificationAction()
-        checkoutAction.activationMode = UIUserNotificationActivationMode.Background
-        checkoutAction.title = "Check Out"
-        checkoutAction.identifier = NotificationCheckOutActionId
-        checkoutAction.destructive = false
-        checkoutAction.authenticationRequired = false
-        
-        let checkoutCategory = UIMutableUserNotificationCategory()
-        checkoutCategory.identifier = NotificationCheckOutCategoryId
-        checkoutCategory.setActions([checkoutAction], forContext: UIUserNotificationActionContext.Default)
-        
-        let categories = Set<UIUserNotificationCategory>([checkoutCategory])
-        let checkoutSettings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: categories)
-        
-        UIApplication.sharedApplication().registerUserNotificationSettings(checkoutSettings)
     }
 }
 
