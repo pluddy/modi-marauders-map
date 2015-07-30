@@ -12,6 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
 
     var window: UIWindow?
+    var storyboard: UIStoryboard?
+    var checkinViewController: UIViewController?
+    var checkoutViewController: UIViewController?
 
     let NotifDeviceZoneDidChange = "NotifDeviceZoneDidChange"
     let beaconManager = ESTBeaconManager()
@@ -22,20 +25,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     var beaconWest = false
     var beaconEast = false
     
-    func newRootViewController(vc: UIViewController) {
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let storyboard = UIStoryboard.mainStoryboard()
-        
-        self.window!.rootViewController = vc
-        self.window!.makeKeyAndVisible()
-    }
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if (!NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce")) {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
             NSUserDefaults.standardUserDefaults().synchronize()
+            
+            //TODO: Register device with the server
         }
-        UINavigationBar.appearance()
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        self.checkinViewController = storyboard!.instantiateViewControllerWithIdentifier("CheckinViewController") as? UIViewController
+        self.checkoutViewController = storyboard!.instantiateViewControllerWithIdentifier("CheckoutViewController") as? UIViewController
+        if (Device.sharedInstance.getStatus() != Checked.In){
+            self.window!.rootViewController = checkinViewController
+        } else {
+            self.window!.rootViewController = checkoutViewController
+        }
+        self.window!.makeKeyAndVisible()
+        
+        println(UIDevice.currentDevice().identifierForVendor.UUIDString)
         
         self.beaconManager.delegate = self
         

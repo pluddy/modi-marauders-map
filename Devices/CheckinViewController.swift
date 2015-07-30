@@ -11,6 +11,11 @@ import UIKit
 
 class CheckinViewController: UIViewController {
     
+    @IBOutlet weak var CheckInButton: UIButton!
+    @IBAction func CheckInPressed(sender: AnyObject) {
+        //Update Server async
+        self.performSegueWithIdentifier("idCheckIntoCheckOutSegue", sender: self)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         

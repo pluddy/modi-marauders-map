@@ -29,11 +29,8 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
             let device = Device.sharedInstance
             device.setStatus(Checked.Out)
             device.setUser(self.selectedUser!)
-
-            let vc = UIStoryboard.checkinViewController()
-            let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.newRootViewController(vc)
         }
+        self.performSegueWithIdentifier("idCheckOuttoCheckInSegue", sender: self)
     }
     
     override func viewDidLoad() {
