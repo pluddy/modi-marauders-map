@@ -16,6 +16,8 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     private var allUsers = [User]()
     private var filteredUsers = [User]()
     private var selectedUser: User?
+    
+    private var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet weak var constraintSearchBarToNavBar: NSLayoutConstraint!
     @IBOutlet var buttonCheckout: UIButton!
@@ -27,7 +29,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
             let device = Device.sharedInstance
             device.setStatus(Checked.Out)
             device.setUser(self.selectedUser!)
-            
+
             let vc = UIStoryboard.checkinViewController()
             let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.newRootViewController(vc)
@@ -37,22 +39,37 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.allUsers = [
-            User(id: "1234", firstName: "Jon", lastName: "Reynolds"),
-            User(id: "5678", firstName: "Patrick", lastName: "Luddy"),
-            User(id: "1357", firstName: "Jesse", lastName: "Jurman"),
-            User(id: "2468", firstName: "Derek", lastName: "Nordgren")
-        ]
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         
-        let device = Device.sharedInstance
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("newUsers:"), name: NotifGetUsersFromNetworkDidComplete, object: nil)
         
         self.styleButton()
         self.tableView.reloadData()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        NetworkService.getUsers()
+        self.startSpinning()
+        
+        let yCoord = (tableView.frame.height / 2) + tableView.frame.origin.y
+        let xCoord = (tableView.frame.width / 2) + tableView.frame.origin.x
+        activityIndicator.center = CGPoint(x: xCoord, y: yCoord)
+        self.view.addSubview(activityIndicator)
+    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func newUsers(notification: NSNotification) {
+        if let info = notification.userInfo {
+            self.allUsers = info[NotifUserInfoPayload] as! [User]
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+            self.stopSpinning()
+        })
     }
     
     func styleButton() {
@@ -69,6 +86,19 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
                 (value: Bool) in
                 self.buttonCheckout.hidden = !show
         })
+    }
+    
+    func startSpinning() {
+        self.tableView.hidden = true
+        self.activityIndicator.hidden = false
+        self.activityIndicator.startAnimating()
+    }
+    
+    func stopSpinning() {
+        self.activityIndicator.hidden = true
+        self.activityIndicator.stopAnimating()
+        self.tableView.hidden = false
+        self.tableView.reloadData()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
