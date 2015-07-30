@@ -77,7 +77,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     }
     
     func showButton(show: Bool) {
-        self.constraintSearchBarToNavBar.constant = show ? 36.0 : 0.0
+        self.constraintSearchBarToNavBar.constant = show ? 84.0 : 8.0
         
         UIView.animateWithDuration(0.2, animations: {
             self.buttonCheckout.alpha = show ? 1.0 : 0.0

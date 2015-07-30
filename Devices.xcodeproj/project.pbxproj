@@ -16,6 +16,9 @@
 		B008B7821B6922BE001BC4CC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7811B6922BE001BC4CC /* User.swift */; };
 		B008B7851B693301001BC4CC /* CheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7841B693301001BC4CC /* CheckinViewController.swift */; };
 		B008B7871B693422001BC4CC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7861B693422001BC4CC /* SettingsViewController.swift */; };
+		B008B78C1B6A7CAF001BC4CC /* Hudl_Huddle-W.png in Resources */ = {isa = PBXBuildFile; fileRef = B008B78B1B6A7CAF001BC4CC /* Hudl_Huddle-W.png */; };
+		B008B78E1B6A8742001BC4CC /* Hudl_Huddle.png in Resources */ = {isa = PBXBuildFile; fileRef = B008B78D1B6A8742001BC4CC /* Hudl_Huddle.png */; };
+		B008B7901B6A8C00001BC4CC /* settings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B008B78F1B6A8C00001BC4CC /* settings-icon.png */; };
 		B0A9A2CA1B6841490093DB80 /* MPGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A9A2C91B6841490093DB80 /* MPGTextField.swift */; };
 		B0A9A2CC1B684C870093DB80 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B0A9A2CB1B684C870093DB80 /* Fonts */; };
 		B0A9A2D41B6856B70093DB80 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A9A2D31B6856B70093DB80 /* NotificationCenter.framework */; };
@@ -75,6 +78,9 @@
 		B008B7811B6922BE001BC4CC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B008B7841B693301001BC4CC /* CheckinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinViewController.swift; sourceTree = "<group>"; };
 		B008B7861B693422001BC4CC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B008B78B1B6A7CAF001BC4CC /* Hudl_Huddle-W.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Hudl_Huddle-W.png"; path = "../Documents/Hudl/Hudl Logo Set/1. Hudl Primary/Hudl_Huddle-W.png"; sourceTree = "<group>"; };
+		B008B78D1B6A8742001BC4CC /* Hudl_Huddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Hudl_Huddle.png; path = "../Documents/Hudl/Hudl Logo Set/1. Hudl Primary/Hudl_Huddle.png"; sourceTree = "<group>"; };
+		B008B78F1B6A8C00001BC4CC /* settings-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings-icon.png"; path = "../Downloads/settings-icon.png"; sourceTree = "<group>"; };
 		B080B1401B671DE70096FB7F /* ObjCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
 		B0A9A2C91B6841490093DB80 /* MPGTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPGTextField.swift; sourceTree = "<group>"; };
 		B0A9A2CB1B684C870093DB80 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
@@ -170,9 +176,20 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		B008B78A1B6A7C1C001BC4CC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B008B78F1B6A8C00001BC4CC /* settings-icon.png */,
+				B008B78D1B6A8742001BC4CC /* Hudl_Huddle.png */,
+				B008B78B1B6A7CAF001BC4CC /* Hudl_Huddle-W.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		B065D70A1B684C1E00802B83 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B008B78A1B6A7C1C001BC4CC /* Images */,
 				B0A9A2CB1B684C870093DB80 /* Fonts */,
 			);
 			name = Resources;
@@ -377,6 +394,9 @@
 				B0BE59531B66F267001562AA /* Main.storyboard in Resources */,
 				B0BE59581B66F267001562AA /* LaunchScreen.xib in Resources */,
 				B0BE59551B66F267001562AA /* Images.xcassets in Resources */,
+				B008B7901B6A8C00001BC4CC /* settings-icon.png in Resources */,
+				B008B78C1B6A7CAF001BC4CC /* Hudl_Huddle-W.png in Resources */,
+				B008B78E1B6A8742001BC4CC /* Hudl_Huddle.png in Resources */,
 				B0A9A2CC1B684C870093DB80 /* Fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
