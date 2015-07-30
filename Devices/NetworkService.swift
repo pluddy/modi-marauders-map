@@ -24,33 +24,37 @@ class NetworkService {
             var error = NSErrorPointer()
             
             var data = NSURLConnection.sendSynchronousRequest(urlRequest, returningResponse: response, error: nil)
-            if let json: NSArray = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: error) as? NSArray {
-                println("Synchronous reponse: \(json)")
-                
-                var users = NSMutableArray()
-                for (var i = 0; i < json.count; i++) {
-                    if let userData = json[i] as? NSDictionary {
-                        let id = userData["id"] as? String
-                        let firstName = userData["firstName"] as? String
-                        let lastName = userData["lastName"] as? String
-                        if (id != nil && firstName != nil && lastName != nil) {
-                            let user = User(id: id!, firstName: firstName!, lastName: lastName!)
-                            users.addObject(user)
+            if data != nil {
+                if let json: NSArray = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: error) as? NSArray {
+                    println("Synchronous reponse: \(json)")
+                    
+                    var users = NSMutableArray()
+                    for (var i = 0; i < json.count; i++) {
+                        if let userData = json[i] as? NSDictionary {
+                            let id = userData["id"] as? String
+                            let firstName = userData["firstName"] as? String
+                            let lastName = userData["lastName"] as? String
+                            if (id != nil && firstName != nil && lastName != nil) {
+                                let user = User(id: id!, firstName: firstName!, lastName: lastName!)
+                                users.addObject(user)
+                            }
+                            else {
+                                println("aww man, no dictionary values today.")
+                            }
                         }
                         else {
-                            println("aww man, no dictionary values today.")
+                            println("aww man, no casting today.")
                         }
                     }
-                    else {
-                        println("aww man, no casting today.")
-                    }
+                    
+                    let info = [NotifUserInfoPayload: users] as [NSObject : AnyObject]
+                    NSNotificationCenter.defaultCenter().postNotificationName(NotifGetUsersFromNetworkDidComplete, object: nil, userInfo: info)
                 }
-                
-                let info = [NotifUserInfoPayload: users] as [NSObject : AnyObject]
-                NSNotificationCenter.defaultCenter().postNotificationName(NotifGetUsersFromNetworkDidComplete, object: nil, userInfo: info)
-            }
-            else {
-                println("aww man, no json today.")
+                else {
+                    println("aww man, no json today.")
+                }
+            } else {
+                println("well shit, no data.")
             }
         }
     }

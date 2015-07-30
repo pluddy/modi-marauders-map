@@ -11,6 +11,7 @@
             <string>TradeGothicLT</string>
             <string>TradeGothicLT</string>
             <string>TradeGothicLT</string>
+            <string>TradeGothicLT</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -44,31 +45,20 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TradeGothicLT" family="Trade Gothic LT" pointSize="21"/>
                                 <state key="normal" title="Done">
-                                    <color key="titleColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="DismissSettings:" destination="2s3-kc-Igt" eventType="touchUpInside" id="Wno-WE-IuR"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FFp-6j-Jnx">
-                                <rect key="frame" x="129" y="28" width="183" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="183" id="Jts-RC-Bus"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="White"/>
-                                    <segment title="Black"/>
-                                    <segment title="Gold"/>
-                                </segments>
-                            </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsV-U5-S0P">
-                                <rect key="frame" x="16" y="31" width="105" height="20.5"/>
+                                <rect key="frame" x="16" y="31" width="137" height="27.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="105" id="aM5-lH-mYr"/>
+                                    <constraint firstAttribute="width" constant="137" id="aM5-lH-mYr"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="TradeGothicLT" family="Trade Gothic LT" pointSize="21"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pS-DV-VyR">
@@ -77,8 +67,20 @@
                                 <color key="textColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FFp-6j-Jnx">
+                                <rect key="frame" x="161" y="31" width="183" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="183" id="Jts-RC-Bus"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="White"/>
+                                    <segment title="Black"/>
+                                    <segment title="Gold"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="QsV-U5-S0P" firstAttribute="top" secondItem="7EC-Gl-MGx" secondAttribute="bottom" constant="11" id="0aW-9p-X93"/>
                             <constraint firstItem="hmq-Qf-pnF" firstAttribute="top" secondItem="WMn-wU-NIV" secondAttribute="bottom" constant="20" id="B5r-jc-a41"/>
@@ -87,7 +89,7 @@
                             <constraint firstItem="FFp-6j-Jnx" firstAttribute="leading" secondItem="QsV-U5-S0P" secondAttribute="trailing" constant="8" symbolic="YES" id="MBn-R3-3H9"/>
                             <constraint firstItem="QsV-U5-S0P" firstAttribute="leading" secondItem="DUz-Og-26h" secondAttribute="leadingMargin" id="cDV-4f-Vlo"/>
                             <constraint firstAttribute="centerX" secondItem="KBk-Dt-c4P" secondAttribute="centerX" id="lqT-rs-gDf"/>
-                            <constraint firstItem="FFp-6j-Jnx" firstAttribute="top" secondItem="7EC-Gl-MGx" secondAttribute="bottom" constant="8" id="uHW-ch-UEh"/>
+                            <constraint firstItem="FFp-6j-Jnx" firstAttribute="top" secondItem="7EC-Gl-MGx" secondAttribute="bottom" constant="11" id="uHW-ch-UEh"/>
                         </constraints>
                     </view>
                     <connections>
@@ -96,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNv-hU-S4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="984" y="-369"/>
+            <point key="canvasLocation" x="-188" y="551"/>
         </scene>
         <!--Checkout View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -212,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="270" y="349"/>
+            <point key="canvasLocation" x="182" y="-369"/>
         </scene>
         <!--Checkin View Controller-->
         <scene sceneID="1MB-BM-pXU">
@@ -226,27 +228,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTX-Rw-YkL">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="barTintColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="textShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Devices" id="pNL-Vj-0hK">
-                                        <barButtonItem key="rightBarButtonItem" title="Settings" id="f6I-ak-1fo">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <segue destination="2s3-kc-Igt" kind="presentation" id="DpB-vI-Ger"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hudl_Huddle.png" translatesAutoresizingMaskIntoConstraints="NO" id="YGl-mT-kew">
+                                <rect key="frame" x="284" y="28" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="MNZ-WT-ZnN"/>
+                                    <constraint firstAttribute="height" constant="32" id="Pp7-ie-go2"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCM-PE-CqJ">
+                                <rect key="frame" x="560" y="32" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="EAl-y6-NwY"/>
+                                    <constraint firstAttribute="height" constant="24" id="RZ7-XT-BTH"/>
+                                </constraints>
+                                <state key="normal" image="settings-icon.png">
+                                    <color key="titleColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2s3-kc-Igt" kind="presentation" id="xrG-Lu-f0i"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="r26-1b-Ztg">
-                                <rect key="frame" x="16" y="64" width="568" height="394"/>
+                                <rect key="frame" x="16" y="68" width="568" height="390"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
@@ -260,32 +264,30 @@
                                 <state key="normal" title="Check In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="SpM-Mb-nwM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="r26-1b-Ztg" firstAttribute="trailing" secondItem="NAd-PJ-NMd" secondAttribute="trailingMargin" id="5TO-zx-Vif"/>
-                            <constraint firstItem="KTX-Rw-YkL" firstAttribute="top" secondItem="pd9-mP-ZRL" secondAttribute="bottom" id="6Wo-ZS-pdA"/>
-                            <constraint firstItem="KTX-Rw-YkL" firstAttribute="leading" secondItem="NAd-PJ-NMd" secondAttribute="leading" id="JI6-jF-QBJ"/>
-                            <constraint firstItem="jrA-i1-592" firstAttribute="top" secondItem="r26-1b-Ztg" secondAttribute="bottom" constant="8" id="JhR-OW-f91"/>
-                            <constraint firstItem="r26-1b-Ztg" firstAttribute="leading" secondItem="NAd-PJ-NMd" secondAttribute="leadingMargin" id="ZVG-TV-DU0"/>
+                            <constraint firstAttribute="centerX" secondItem="YGl-mT-kew" secondAttribute="centerX" id="3t1-kl-f9g"/>
+                            <constraint firstItem="r26-1b-Ztg" firstAttribute="top" secondItem="YGl-mT-kew" secondAttribute="bottom" constant="8" id="Wo2-1e-fin"/>
                             <constraint firstItem="jrA-i1-592" firstAttribute="trailing" secondItem="NAd-PJ-NMd" secondAttribute="trailingMargin" id="amB-qL-FSM"/>
                             <constraint firstItem="GFl-cf-8x3" firstAttribute="top" secondItem="jrA-i1-592" secondAttribute="bottom" constant="8" id="bkA-eu-vKa"/>
-                            <constraint firstItem="KTX-Rw-YkL" firstAttribute="centerX" secondItem="r26-1b-Ztg" secondAttribute="centerX" id="j0m-5e-Xcj"/>
+                            <constraint firstItem="YGl-mT-kew" firstAttribute="centerY" secondItem="BCM-PE-CqJ" secondAttribute="centerY" id="dmF-JJ-8Bn"/>
+                            <constraint firstItem="r26-1b-Ztg" firstAttribute="trailing" secondItem="NAd-PJ-NMd" secondAttribute="trailingMargin" id="gyK-id-RbM"/>
+                            <constraint firstItem="jrA-i1-592" firstAttribute="top" secondItem="r26-1b-Ztg" secondAttribute="bottom" constant="8" id="hoc-Ia-foV"/>
+                            <constraint firstItem="BCM-PE-CqJ" firstAttribute="trailing" secondItem="NAd-PJ-NMd" secondAttribute="trailingMargin" id="oFn-TY-ba7"/>
                             <constraint firstItem="jrA-i1-592" firstAttribute="leading" secondItem="NAd-PJ-NMd" secondAttribute="leadingMargin" id="pGs-3S-YYY"/>
-                            <constraint firstItem="KTX-Rw-YkL" firstAttribute="leading" secondItem="NAd-PJ-NMd" secondAttribute="leading" id="qMi-iS-Aed"/>
-                            <constraint firstItem="KTX-Rw-YkL" firstAttribute="bottom" secondItem="r26-1b-Ztg" secondAttribute="top" id="zfa-wy-KfL"/>
+                            <constraint firstItem="YGl-mT-kew" firstAttribute="top" secondItem="pd9-mP-ZRL" secondAttribute="bottom" constant="8" id="rUj-xd-YJZ"/>
+                            <constraint firstItem="r26-1b-Ztg" firstAttribute="leading" secondItem="NAd-PJ-NMd" secondAttribute="leadingMargin" id="zBB-Uh-KPe"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="qMi-iS-Aed"/>
-                            </mask>
-                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ade-ba-WBo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="984" y="365"/>
+            <point key="canvasLocation" x="-566" y="-369"/>
         </scene>
     </scenes>
     <resources>
@@ -293,6 +295,6 @@
         <image name="settings-icon.png" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DpB-vI-Ger"/>
+        <segue reference="xrG-Lu-f0i"/>
     </inferredMetricsTieBreakers>
 </document>
