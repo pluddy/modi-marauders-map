@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
 
     var window: UIWindow?
 
-    let NSNotificationDeviceZoneDidChange = "NotifDeviceZoneDidChange"
+    let NotifDeviceZoneDidChange = "NotifDeviceZoneDidChange"
     let beaconManager = ESTBeaconManager()
     let NotificationCheckOutCategoryId = "CHECK_IN"
     let NotificationCheckOutActionId = "ACTION_CHECK_IN"
@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
+        UINavigationBar.appearance()
         
         self.beaconManager.delegate = self
         
@@ -87,10 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         case "blueberryCart":
             beaconCart = true
             println("Entered Blueberry Cart Zone")
-            let notification = UILocalNotification()
-            notification.soundName = "Hello"
-            notification.alertBody = "✅Checked in! Thanks!"
-            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
             break
         case "iceEast":
             beaconEast = true
@@ -103,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         default:
             break
         }
-        
+        updateDeviceZoneFromActiveBeacons()
     }
     
     func beaconManager(manager: AnyObject!, didExitRegion region: CLBeaconRegion!) {
@@ -111,10 +108,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         case "blueberryCart":
             beaconCart = false
             println("Exited Blueberry Cart Zone")
-            let notification = UILocalNotification()
-            notification.alertBody = "Please Check Out this Device"
-            notification.alertAction = "check out"
-            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
             break
         case "iceEast":
             beaconEast = false
@@ -127,9 +120,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         default:
             break
         }
+        updateDeviceZoneFromActiveBeacons()
     }
     
-    func updateDeviceZoneFromActiveBeacons(){
+    func updateDeviceZoneFromActiveBeacons() {
         var newZone: Zone
         if (beaconCart) {
             newZone = Zone.Cart
@@ -143,7 +137,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             newZone = Zone.Unknown
         }
         
-        Device.sharedInstance
+        Device.sharedInstance.setLocation(newZone)
+        NSNotificationCenter.defaultCenter().postNotificationName(NotifDeviceZoneDidChange, object: nil)
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {

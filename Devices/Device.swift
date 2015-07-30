@@ -72,4 +72,12 @@ class Device {
     func getStatus() -> Checked {
         return self.status
     }
+    
+    func setLocation(location: Zone) {
+        self.location = location
+    }
+    
+    func getLocation() -> Zone {
+        return self.location
+    }
 }
