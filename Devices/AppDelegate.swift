@@ -17,10 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     let beaconManager = ESTBeaconManager()
     let NotificationCheckOutCategoryId = "CHECK_IN"
     let NotificationCheckOutActionId = "ACTION_CHECK_IN"
-    var beaconWest = false
+    
     var beaconCart = false
+    var beaconWest = false
     var beaconEast = false
-
+    
+    func newRootViewController(vc: UIViewController) {
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let storyboard = UIStoryboard.mainStoryboard()
+        
+        self.window!.rootViewController = vc
+        self.window!.makeKeyAndVisible()
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if (!NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce")) {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")

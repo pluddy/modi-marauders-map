@@ -15,11 +15,24 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     private var searchActive = false
     private var allUsers = [User]()
     private var filteredUsers = [User]()
+    private var selectedUser: User?
 
     @IBOutlet weak var constraintSearchBarToNavBar: NSLayoutConstraint!
     @IBOutlet var buttonCheckout: UIButton!
     @IBOutlet var searchField: UISearchBar!
     @IBOutlet var tableView: UITableView!
+    
+    @IBAction func checkout(sender: AnyObject) {
+        if (selectedUser != nil) {
+            let device = Device.sharedInstance
+            device.setStatus(Checked.Out)
+            device.setUser(self.selectedUser!)
+            
+            let vc = UIStoryboard.checkinViewController()
+            let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.newRootViewController(vc)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,11 +89,10 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row
-        let selectedUser = self.searchActive ? self.filteredUsers[row] : self.allUsers[row]
+        self.selectedUser = self.searchActive ? self.filteredUsers[row] : self.allUsers[row]
         
         showButton(true)
         
-        println(selectedUser.fullName())
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.searchField.resignFirstResponder()
     }
