@@ -144,8 +144,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         var newZone: Zone
         if (beaconCart) {
             newZone = Zone.Cart
-        } else if (beaconWest && beaconEast) {
-            newZone = Zone.Middle
         } else if (!beaconWest && beaconEast) {
             newZone = Zone.East
         } else if (beaconWest && !beaconEast) {

@@ -25,9 +25,6 @@ class SettingsViewController: UIViewController {
         case Zone.East:
             locationLabel.text = "Location: East"
             break
-        case Zone.Middle:
-            locationLabel.text = "Location: Middle"
-            break
         case Zone.Cart:
             locationLabel.text = "Location: Cart"
             break

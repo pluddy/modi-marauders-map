@@ -132,8 +132,9 @@ class NetworkService {
         
         let putEndpoint = NetworkService.baseURL + "devices/\(udid)"
         let parameters = [
+            "responseType": "json",
             "udid": device.getId(),
-            "checkedOut": false
+            "checkedOut": checkedOut
             ] as [String : AnyObject]
         
         request(.PUT, putEndpoint, parameters: parameters, encoding: .JSON).responseJSON { (request, response, data, error) in
@@ -144,49 +145,11 @@ class NetworkService {
             else if let data: AnyObject = data {
                 let json = JSON(data)
                 println(json)
-                dispatch_async(dispatch_get_main_queue(), {
-                    NSNotificationCenter.defaultCenter().postNotificationName(NotifUpdateRemoteDeviceDidComplete, object: nil)
-                })
             }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                NSNotificationCenter.defaultCenter().postNotificationName(NotifUpdateRemoteDeviceDidComplete, object: nil)
+            })
         }
     }
-    
-//    class func updateDeviceStatus(device: Device, checkIn: Bool) {
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-//            let device = Device.sharedInstance
-//            let putEndpoint = NetworkService.baseURL + "devices"
-//            var urlRequest = NSMutableURLRequest(URL: NSURL(string: putEndpoint)!)
-//            urlRequest.HTTPMethod = "POST"
-//            
-//            var newPut: NSDictionary = ["title": "Frist Psot", "body": "I iz fisrt", "userId": 1];
-//            var putJsonError = NSErrorPointer()
-//            var jsonPut = NSJSONSerialization.dataWithJSONObject(newPut, options: nil, error:  putJsonError)
-//            urlRequest.HTTPBody = jsonPut
-//            
-//            var response: AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil
-//            var requestError = NSErrorPointer()
-//            var data = NSURLConnection.sendSynchronousRequest(urlRequest, returningResponse: response, error: requestError)
-//            if (data != nil && requestError == nil) {
-//                var jsonError: NSError?
-//                
-//                if let json: NSArray = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: &jsonError) as? NSArray {
-//                    
-//                    if (jsonError == nil) {
-//                        println("Synchronous reponse: \(json)")
-//                        
-//                        println(json.description)
-//                    }
-//                    else {
-//                        println("aww man, json produced an error")
-//                    }
-//                }
-//                else {
-//                    jsonError != nil ? println(jsonError) : println("aww man, no json today.")
-//                }
-//            }
-//            else {
-//                println("aww man, request produced an error")
-//            }
-//        }
-//    }
 }

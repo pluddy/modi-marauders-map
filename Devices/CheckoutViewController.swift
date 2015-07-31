@@ -31,8 +31,8 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
             let device = Device.sharedInstance
             device.setStatus(Checked.Out, updateTime: true)
             device.setUser(self.selectedUser!)
+            NetworkService.updateRemoteDevice()
         }
-        self.performSegueWithIdentifier("idCheckOuttoCheckInSegue", sender: self)
     }
     
     override func viewDidLoad() {
@@ -46,7 +46,10 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     }
     
     override func viewDidAppear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("newUsers:"), name: NotifGetUsersFromNetworkDidComplete, object: nil)
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: Selector("newUsers:"), name: NotifGetUsersFromNetworkDidComplete, object: nil)
+        notificationCenter.addObserver(self, selector: Selector("updateRemoteDeviceFinished:"), name: NotifUpdateRemoteDeviceDidComplete, object: nil)
+        
         
         NetworkService.getUsers()
         self.startSpinningTable()
@@ -73,10 +76,10 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         
         self.tableView.reloadData()
         self.stopSpinningTable()
-//        dispatch_async(dispatch_get_main_queue(), {
-//            self.tableView.reloadData()
-//            self.stopSpinning()
-//        })
+    }
+    
+    func updateRemoteDeviceFinished(notification: NSNotification) {
+        self.performSegueWithIdentifier("idCheckOuttoCheckInSegue", sender: self)
     }
     
     func styleButton() {
@@ -102,7 +105,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     }
     
     func startSpinningButton() {
-        self.buttonCheckout.titleLabel?.text = ""
+        self.buttonCheckout.setTitle("", forState: UIControlState.Normal)
         self.activityIndicatorButton.hidden = false
         self.activityIndicatorButton.startAnimating()
     }
@@ -116,7 +119,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     
     func stopSpinningButton() {
         self.activityIndicatorButton.hidden = true
-        self.buttonCheckout.titleLabel?.text = "Check Out"
+        self.buttonCheckout.setTitle("Check Out", forState: UIControlState.Normal)
         self.activityIndicatorButton.stopAnimating()
     }
     
