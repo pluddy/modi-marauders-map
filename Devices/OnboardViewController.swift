@@ -21,7 +21,25 @@ class OnboardViewController: UIViewController {
     @IBOutlet weak var buttonMischief: UIButton!
     
     @IBAction func mischiefManaged(sender: AnyObject) {
-        
+        switch segmentedDeviceColor.selectedSegmentIndex {
+        case 0:
+            Device.sharedInstance.setColor("Black")
+            break
+        case 1:
+            Device.sharedInstance.setColor("White")
+            break
+        case 2:
+            Device.sharedInstance.setColor("Gold")
+            break
+        default:
+            break
+        }
+        if(Device.sharedInstance.getStatus() == Checked.In){
+            self.performSegueWithIdentifier("showCheckout", sender: self)
+        }
+        else {
+            self.performSegueWithIdentifier("showCheckin", sender: self)
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()

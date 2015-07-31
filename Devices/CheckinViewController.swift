@@ -17,7 +17,12 @@ class CheckinViewController: UIViewController {
     @IBAction func CheckInPressed(sender: AnyObject) {
         self.startSpinningButton()
         //Update Server async
-        self.performSegueWithIdentifier("idCheckIntoCheckOutSegue", sender: self)
+        if(FirstSegue.sharedInstance.getId() == segueId.CheckOuttoCheckIn){
+            self.performSegueWithIdentifier("idCheckOuttoCheckInSegueUnwind", sender: self)
+        }
+        else {
+            self.performSegueWithIdentifier("idCheckIntoCheckOutSegue", sender: self)
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
