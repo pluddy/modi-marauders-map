@@ -27,7 +27,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     @IBAction func checkout(sender: AnyObject) {
         if (selectedUser != nil) {
             let device = Device.sharedInstance
-            device.setStatus(Checked.Out)
+            device.setStatus(Checked.Out, updateTime: true)
             device.setUser(self.selectedUser!)
 
             let vc = UIStoryboard.checkinViewController()
@@ -41,13 +41,13 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("newUsers:"), name: NotifGetUsersFromNetworkDidComplete, object: nil)
-        
         self.styleButton()
         self.tableView.reloadData()
     }
     
     override func viewDidAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("newUsers:"), name: NotifGetUsersFromNetworkDidComplete, object: nil)
+        
         NetworkService.getUsers()
         self.startSpinning()
         
@@ -66,10 +66,12 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
             self.allUsers = info[NotifUserInfoPayload] as! [User]
         }
         
-        dispatch_async(dispatch_get_main_queue(), {
-            self.tableView.reloadData()
-            self.stopSpinning()
-        })
+        self.tableView.reloadData()
+        self.stopSpinning()
+//        dispatch_async(dispatch_get_main_queue(), {
+//            self.tableView.reloadData()
+//            self.stopSpinning()
+//        })
     }
     
     func styleButton() {

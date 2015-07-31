@@ -34,10 +34,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         if (!NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce")) {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
             NSUserDefaults.standardUserDefaults().synchronize()
+            
+            NetworkService.registerDevice()
         }
         UINavigationBar.appearance()
         
+        // remove!!
+        NetworkService.registerDevice()
+        
         self.beaconManager.delegate = self
+        
+        let device = Device.sharedInstance
+        println(device.getFullName())
         
         self.beaconManager.requestAlwaysAuthorization()
         
@@ -57,6 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             major: 40435, minor: 8969, identifier: "iceEast"))
         
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil))
+        
+        NetworkService.updateDevice()
         
         return true
     }
