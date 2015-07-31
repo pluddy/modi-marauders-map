@@ -14,12 +14,11 @@ enum Checked {
     case Out
 }
 
-enum Zone {
-    case West
-    case Middle
-    case East
-    case Cart
-    case Unknown
+enum Zone: String{
+    case West = "West"
+    case East = "East"
+    case Cart = "Cart"
+    case Unknown = "Unknown"
 }
 
 enum BeaconLocation {
@@ -117,7 +116,7 @@ class Device {
         self.location = Zone.Unknown
     }
     
-    func setUser(user: User) {
+    func setUser(user: User?) {
         self.user = user
     }
     
@@ -136,12 +135,12 @@ class Device {
         return self.status
     }
     
-    func setLocation(location: Zone) {
+    func setZone(location: Zone) {
         self.location = location
         self.timeStampZone = NSDate()
     }
     
-    func getLocation() -> Zone {
+    func getZone() -> Zone {
         return self.location
     }
     

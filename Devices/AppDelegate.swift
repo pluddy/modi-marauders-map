@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             
             NetworkService.registerDevice()
         }
+        else {
+            NetworkService.updateLocalDevice()
+        }
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
@@ -45,9 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         self.window!.makeKeyAndVisible()
         
         println(UIDevice.currentDevice().identifierForVendor.UUIDString)
-        
-        // remove!!
-        NetworkService.registerDevice()
         
         self.beaconManager.delegate = self
         
@@ -72,8 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             major: 40435, minor: 8969, identifier: "iceEast"))
         
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil))
-        
-        NetworkService.updateDevice()
         
         return true
     }
@@ -156,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             newZone = Zone.Unknown
         }
         
-        Device.sharedInstance.setLocation(newZone)
+        Device.sharedInstance.setZone(newZone)
         NSNotificationCenter.defaultCenter().postNotificationName(NotifDeviceZoneDidChange, object: nil)
     }
     

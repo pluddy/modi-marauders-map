@@ -9,8 +9,9 @@
 import Foundation
 
 let NotifGetUsersFromNetworkDidComplete: String = "NotifGetUsersFromNetworkDidComplete"
-let NotifUpdateDeviceFromNetworkDidComplete: String = "NotifGetDeviceFromNetworkDidComplete"
-let NotifPutDeviceOnNetworkDidComplete: String = "NotifPutDeviceOnNetworkDidComplete"
+let NotifUpdateLocalDeviceDidComplete: String = "NotifUpdateLocalDeviceDidComplete"
+let NotifUpdateRemoteDeviceDidComplete: String = "NotifUpdateRemoteDeviceDidComplete"
+let NotifRegisterDeviceDidComplete: String = "NotifRegisterDeviceDidComplete"
 let NotifUserInfoPayload: String = "NotifUserInfoPayload"
 
 class NetworkService {
@@ -22,182 +23,130 @@ class NetworkService {
         request(.GET, getEndpoint).responseJSON { (request, response, data, error) in
             if let anError = error {
                 println("error calling GET on /users.json")
-                println(error)
+                println(anError)
             }
             else if let data: AnyObject = data {
-                let post = JSON(data)
-                // now we have the results, let's just print them though a tableview would definitely be better UI:
-                println("The post is: " + post.description)
-                if let title = post["title"].string
-                {
-                    // to access a field:
-                    println("The title is: " + title)
-                }
-                else
-                {
-                    println("error parsing /posts/1")
-                }
-            }
-        }
-        
-        
-        
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            let getEndpoint = NetworkService.baseURL + "users.json"
-            var urlRequest = NSURLRequest(URL: NSURL(string: getEndpoint)!)
-            var response: AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil
-            var requestError = NSErrorPointer()
-            
-            var data = NSURLConnection.sendSynchronousRequest(urlRequest, returningResponse: response, error: requestError)
-            if (data != nil && requestError == nil) {
-                var jsonError = NSErrorPointer()
+                let json = JSON(data).arrayValue
+                var users = NSMutableArray()
                 
-                if let json: NSArray = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: jsonError) as? NSArray {
-                    if (jsonError == nil) {
-                        println("Synchronous reponse: \(json)")
-                        
-                        var users = NSMutableArray()
-                        for (var i = 0; i < json.count; i++) {
-                            if let userData = json[i] as? NSDictionary {
-                                let id = userData["id"] as? String
-                                let firstName = userData["firstName"] as? String
-                                let lastName = userData["lastName"] as? String
-                                if (id != nil && firstName != nil && lastName != nil) {
-                                    let user = User(id: id!, firstName: firstName!, lastName: lastName!)
-                                    users.addObject(user)
-                                }
-                                else {
-                                    println("aww man, no dictionary values today.")
-                                }
-                            }
-                            else {
-                                println("aww man, no casting today.")
-                            }
-                        }
-                        
-                        dispatch_async(dispatch_get_main_queue(), {
-                            let info = [NotifUserInfoPayload: users] as [NSObject : AnyObject]
-                            NSNotificationCenter.defaultCenter().postNotificationName(NotifGetUsersFromNetworkDidComplete, object: nil, userInfo: info)
-                        })
+                for user in json {
+                    let id = user["id"].string
+                    let firstName = user["firstName"].string
+                    let lastName = user["lastName"].string
+                    
+                    if (id != nil && firstName != nil && lastName != nil) {
+                        let user = User(id: id!, firstName: firstName!, lastName: lastName!)
+                        users.addObject(user)
                     }
                     else {
-                        println("aww man, json produced an error")
+                        println("Did not have enough info to create user from json")
                     }
                 }
-                else {
-                    println("aww man, no json today.")
-                }
-            }
-            else {
-                println("aww man, request produced an error")
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    let info = [NotifUserInfoPayload: users] as [NSObject : AnyObject]
+                    NSNotificationCenter.defaultCenter().postNotificationName(NotifGetUsersFromNetworkDidComplete, object: nil, userInfo: info)
+                })
             }
         }
     }
     
-    class func updateDevice() {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            let device = Device.sharedInstance
-            let getEndpoint = NetworkService.baseURL + "devices/" + device.getId() + ".json"
-            var urlRequest = NSURLRequest(URL: NSURL(string: getEndpoint)!)
-            
-            var response: AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil
-            var requestError = NSErrorPointer()
-            
-            var data = NSURLConnection.sendSynchronousRequest(urlRequest, returningResponse: response, error: requestError)
-            if (data != nil && requestError == nil) {
-                var jsonError = NSErrorPointer()
+    class func updateLocalDevice() {
+        let device = Device.sharedInstance
+        let getEndpoint = NetworkService.baseURL + "devices/" + device.getId() + ".json"
+        
+        request(.GET, getEndpoint).responseJSON { (request, response, data, error) in
+            if let anError = error {
+                println("error calling GET on /devices/\(device.getId()).json")
+                println(anError)
+            }
+            else if let data: AnyObject = data {
+                let json = JSON(data)
                 
-                if let json: NSDictionary = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: jsonError) as? NSDictionary {
-                    println("Synchronous reponse: \(json)")
+                var user: User?
+                if let userData = json["user"].dictionary {
+                    let id = userData["id"]?.string
+                    let firstName = userData["firstName"]?.string
+                    let lastName = userData["lastName"]?.string
                     
-                    if (jsonError == nil) {
-                        var user: User?
-                        if let userData = json["user"] as? NSDictionary {
-                            let id = userData["id"] as? String
-                            let firstName = userData["firstName"] as? String
-                            let lastName = userData["lastName"] as? String
-                            if (id != nil && firstName != nil && lastName != nil) {
-                                user = User(id: id!, firstName: firstName!, lastName: lastName!)
-                            }
-                        }
-                        
-                        let uuid = json["uuid"] as? String
-                        let checkedOut = json["checkedOut"] as? Bool
-                        
-                        if (uuid != nil && checkedOut != nil && user != nil && uuid == device.getId()) {
-                            dispatch_async(dispatch_get_main_queue(), {
-                                device.setUser(user!)
-                                device.setStatus(checkedOut! ? Checked.Out : Checked.In, updateTime: false)
-                                
-                                NSNotificationCenter.defaultCenter().postNotificationName(NotifUpdateDeviceFromNetworkDidComplete, object: nil)
-                            })
-                        }
-                        else {
-                            println("aww man, no dictionary values today.")
-                        }
+                    if (id != nil && firstName != nil && lastName != nil) {
+                        user = User(id: id!, firstName: firstName!, lastName: lastName!)
                     }
-                    else {
-                        println("aww man, json produced an error")
-                    }
+                }
+                
+                let uuid = json["udid"].string
+                let checkedOut = json["checkedOut"].bool
+                
+                if (uuid != nil && checkedOut != nil && uuid == device.getId()) {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        device.setUser(user)
+                        device.setStatus(checkedOut! ? Checked.Out : Checked.In, updateTime: false)
+                        
+                        NSNotificationCenter.defaultCenter().postNotificationName(NotifUpdateLocalDeviceDidComplete, object: nil)
+                    })
                 }
                 else {
-                    println("aww man, no json today.")
+                    println("Did not have enough info to create device from json")
                 }
-            }
-            else {
-                println("aww man, request produced an error")
             }
         }
     }
     
     class func registerDevice() {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            let device = Device.sharedInstance
-            let name = device.getFullName().stringByReplacingOccurrencesOfString(" ", withString: "%20", options: nil, range: nil)
-            let udid = device.getId()
-            let platform = "iOS"
-            let osVersion = device.getOsVersion()
-            let checkedOut = false
-            
-            let postEndpoint = NetworkService.baseURL + "devices?name=\(name)&udid=\(udid)&platform=\(platform)&osVersion=\(osVersion)&checkedOut=\(checkedOut)"
-            var urlRequest = NSMutableURLRequest(URL: NSURL(string: postEndpoint)!)
-            urlRequest.HTTPMethod = "POST"
-            
-            var newPost: NSDictionary = [
-                "name": device.getFullName(),
-                "udid": device.getId(),
-                "platform": "iOS",
-                "osVersion": device.getOsVersion(),
-                "checkedOut": false
-            ];
-            var jsonError = NSErrorPointer()
-            var postJson = NSJSONSerialization.dataWithJSONObject(newPost, options: nil, error:  jsonError)
-            urlRequest.HTTPBody = postJson
-            
-            var response: AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil
-            var requestError = NSErrorPointer()
-            var data = NSURLConnection.sendSynchronousRequest(urlRequest, returningResponse: response, error: requestError)
-            if (data != nil && requestError == nil) {
-                var jsonError: NSError?
-                
-                if let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: &jsonError) {
-                    
-                    if (jsonError == nil) {
-                        println("Synchronous reponse: \(json)")
-                        
-                        println(json.description)
-                    }
-                    else {
-                        println("aww man, json produced an error")
-                    }
-                }
-                else {
-                    jsonError != nil ? println(jsonError) : println("aww man, no json today.")
-                }
+        let device = Device.sharedInstance
+        let name = device.getFullName().stringByReplacingOccurrencesOfString(" ", withString: "%20", options: nil, range: nil)
+        let udid = device.getId()
+        let platform = "iOS"
+        let osVersion = device.getOsVersion()
+        let checkedOut = false
+        let postEndpoint = NetworkService.baseURL + "devices"
+//        let postEndpoint = NetworkService.baseURL + "devices?name=\(name)&udid=\(udid)&platform=\(platform)&osVersion=\(osVersion)&checkedOut=\(checkedOut)"
+        let parameters = [
+            "name": device.getFullName(),
+            "udid": device.getId(),
+            "platform": "iOS",
+            "osVersion": device.getOsVersion(),
+            "checkedOut": false
+        ] as [String : AnyObject]
+        
+        request(.POST, postEndpoint, parameters: parameters, encoding: .JSON).responseJSON { (request, response, data, error) in
+            if let anError = error {
+                println("error calling POST on /devices/")
+                println(anError)
             }
-            else {
-                println("aww man, request produced an error")
+            else if let data: AnyObject = data {
+                let json = JSON(data)
+                println(json)
+                dispatch_async(dispatch_get_main_queue(), {
+                    NSNotificationCenter.defaultCenter().postNotificationName(NotifRegisterDeviceDidComplete, object: nil)
+                })
+            }
+        }
+    }
+    
+    class func updateRemoteDevice() {
+        let device = Device.sharedInstance
+        let zone = device.getZone().rawValue
+        let udid = device.getId()
+        let checkedOut = device.getStatus() == Checked.Out
+        
+        let putEndpoint = NetworkService.baseURL + "devices/\(udid)"
+        let parameters = [
+            "udid": device.getId(),
+            "checkedOut": false
+            ] as [String : AnyObject]
+        
+        request(.PUT, putEndpoint, parameters: parameters, encoding: .JSON).responseJSON { (request, response, data, error) in
+            if let anError = error {
+                println("error calling PUT on /devices/")
+                println(anError)
+            }
+            else if let data: AnyObject = data {
+                let json = JSON(data)
+                println(json)
+                dispatch_async(dispatch_get_main_queue(), {
+                    NSNotificationCenter.defaultCenter().postNotificationName(NotifUpdateRemoteDeviceDidComplete, object: nil)
+                })
             }
         }
     }
