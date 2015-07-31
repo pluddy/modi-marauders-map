@@ -17,8 +17,6 @@
 		B008B7931B6AA06E001BC4CC /* Hudl_Huddle-W.png in Resources */ = {isa = PBXBuildFile; fileRef = B008B7911B6AA06E001BC4CC /* Hudl_Huddle-W.png */; };
 		B008B7941B6AA06E001BC4CC /* Hudl_Huddle.png in Resources */ = {isa = PBXBuildFile; fileRef = B008B7921B6AA06E001BC4CC /* Hudl_Huddle.png */; };
 		B008B7961B6AA07F001BC4CC /* settings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B008B7951B6AA07F001BC4CC /* settings-icon.png */; };
-		B008B79E1B6ABBE9001BC4CC /* CheckIntoCheckOutSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B79A1B6ABBE9001BC4CC /* CheckIntoCheckOutSegue.swift */; };
-		B008B79F1B6ABBE9001BC4CC /* CheckOuttoCheckInSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B79B1B6ABBE9001BC4CC /* CheckOuttoCheckInSegue.swift */; };
 		B008B7A81B6AC8DA001BC4CC /* Hudl_Devices.png in Resources */ = {isa = PBXBuildFile; fileRef = B008B7A71B6AC8DA001BC4CC /* Hudl_Devices.png */; };
 		B008B7B61B6B104C001BC4CC /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7AB1B6B104C001BC4CC /* Alamofire.swift */; };
 		B008B7B71B6B104C001BC4CC /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7AC1B6B104C001BC4CC /* Download.swift */; };
@@ -103,8 +101,6 @@
 		B008B7911B6AA06E001BC4CC /* Hudl_Huddle-W.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hudl_Huddle-W.png"; sourceTree = "<group>"; };
 		B008B7921B6AA06E001BC4CC /* Hudl_Huddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hudl_Huddle.png; sourceTree = "<group>"; };
 		B008B7951B6AA07F001BC4CC /* settings-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-icon.png"; sourceTree = "<group>"; };
-		B008B79A1B6ABBE9001BC4CC /* CheckIntoCheckOutSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckIntoCheckOutSegue.swift; sourceTree = "<group>"; };
-		B008B79B1B6ABBE9001BC4CC /* CheckOuttoCheckInSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOuttoCheckInSegue.swift; sourceTree = "<group>"; };
 		B008B7A71B6AC8DA001BC4CC /* Hudl_Devices.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hudl_Devices.png; sourceTree = "<group>"; };
 		B008B7AB1B6B104C001BC4CC /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		B008B7AC1B6B104C001BC4CC /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
@@ -242,15 +238,6 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		B008B7971B6AB141001BC4CC /* Segues */ = {
-			isa = PBXGroup;
-			children = (
-				B008B79A1B6ABBE9001BC4CC /* CheckIntoCheckOutSegue.swift */,
-				B008B79B1B6ABBE9001BC4CC /* CheckOuttoCheckInSegue.swift */,
-			);
-			name = Segues;
-			sourceTree = "<group>";
-		};
 		B008B7A21B6ABF77001BC4CC /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,7 +336,6 @@
 			isa = PBXGroup;
 			children = (
 				B0BE594D1B66F267001562AA /* AppDelegate.swift */,
-				B008B7971B6AB141001BC4CC /* Segues */,
 				6E4E719E1B697544002F3266 /* Helpers */,
 				B008B7A21B6ABF77001BC4CC /* View Controllers */,
 				B008B7831B6924D1001BC4CC /* Models */,
@@ -645,13 +631,11 @@
 				B008B7BB1B6B104C001BC4CC /* ParameterEncoding.swift in Sources */,
 				6E77B94C1B6A630D00738E6A /* NetworkService.swift in Sources */,
 				B008B7C31B6B1332001BC4CC /* SwiftyJSON.swift in Sources */,
-				B008B79F1B6ABBE9001BC4CC /* CheckOuttoCheckInSegue.swift in Sources */,
 				B008B7BD1B6B104C001BC4CC /* ResponseSerialization.swift in Sources */,
 				B008B7E31B6B4EAC001BC4CC /* StoryboardHelper.swift in Sources */,
 				B008B7BA1B6B104C001BC4CC /* MultipartFormData.swift in Sources */,
 				B008B7B71B6B104C001BC4CC /* Download.swift in Sources */,
 				B008B7D01B6B2BE2001BC4CC /* OnboardViewController.swift in Sources */,
-				B008B79E1B6ABBE9001BC4CC /* CheckIntoCheckOutSegue.swift in Sources */,
 				B008B7821B6922BE001BC4CC /* User.swift in Sources */,
 				B008B7BC1B6B104C001BC4CC /* Request.swift in Sources */,
 				B008B7851B693301001BC4CC /* CheckinViewController.swift in Sources */,

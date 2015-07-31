@@ -79,7 +79,6 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     }
     
     func updateRemoteDeviceFinished(notification: NSNotification) {
-        self.performSegueWithIdentifier("idCheckOuttoCheckInSegue", sender: self)
     }
     
     func styleButton() {

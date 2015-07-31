@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class SettingsViewController: UIViewController {
-        
-    @IBOutlet var locationLabel: UILabel!
+    
+    @IBOutlet weak var segmentedDeviceColor: UISegmentedControl!
     
     @IBAction func DismissSettings(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -20,7 +20,6 @@ class SettingsViewController: UIViewController {
         switch sender.selectedSegmentIndex
         {
         case 0:
-            Device.sharedInstance
             break
         case 1:
             break
@@ -29,37 +28,30 @@ class SettingsViewController: UIViewController {
         default:
             break
         }
-    }
-
-    func locationLabelText(var zone:Zone) {
-        switch (zone){
-        case Zone.West:
-            locationLabel.text = "Location: West"
-            break
-        case Zone.East:
-            locationLabel.text = "Location: East"
-            break
-        case Zone.Cart:
-            locationLabel.text = "Location: Cart"
-            break
-        case Zone.Unknown:
-            locationLabel.text = "Location: Unknown"
-            break
-        default:
-            locationLabel.text = "Location: Fail"
-        }
-        locationLabel.layoutIfNeeded()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let device = Device.sharedInstance
-        
-        
-        
-        
+        switch Device.sharedInstance.getColor()
+        {
+        case "Black":
+            self.segmentedDeviceColor.selectedSegmentIndex = 0
+            break
+        case "White":
+            self.segmentedDeviceColor.selectedSegmentIndex = 1
+            break
+        case "Gold":
+            self.segmentedDeviceColor.selectedSegmentIndex = 2
+            break
+        default:
+            break
+        }
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+
     }
     
     override func didReceiveMemoryWarning() {

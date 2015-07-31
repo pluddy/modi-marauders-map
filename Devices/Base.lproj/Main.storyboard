@@ -61,8 +61,8 @@
                                     <constraint firstAttribute="width" constant="183" id="Jts-RC-Bus"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="White"/>
                                     <segment title="Black"/>
+                                    <segment title="White"/>
                                     <segment title="Gold"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,6 +81,10 @@
                             <constraint firstItem="FFp-6j-Jnx" firstAttribute="top" secondItem="7EC-Gl-MGx" secondAttribute="bottom" constant="11" id="uHW-ch-UEh"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="segmentedDeviceColor" destination="FFp-6j-Jnx" id="0YI-gS-Onc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNv-hU-S4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -197,6 +201,7 @@
                         <outlet property="searchField" destination="G6y-Ua-bvW" id="ckd-te-Sk2"/>
                         <outlet property="tableView" destination="fpq-OG-iCA" id="kx9-0P-0zM"/>
                         <segue destination="Dxv-20-Hbt" kind="custom" identifier="idCheckOuttoCheckInSegue" customClass="CheckOuttoCheckInSegue" customModule="Devices" customModuleProvider="target" id="ysQ-Ju-Wmm"/>
+                        <segue destination="Dxv-20-Hbt" kind="custom" identifier="idCheckIntoCheckOutSegueUnwind" customClass="CheckIntoCheckOutSegueUnwind" customModule="Devices" customModuleProvider="target" id="ZeO-iG-p9o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -414,6 +419,7 @@
                     <connections>
                         <outlet property="buttonCheckin" destination="jrA-i1-592" id="Odn-ez-8ln"/>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="idCheckIntoCheckOutSegue" customClass="CheckIntoCheckOutSegue" customModule="Devices" customModuleProvider="target" id="lX9-Jj-g7c"/>
+                        <segue destination="BYZ-38-t0r" kind="custom" identifier="idCheckOuttoCheckInSegueUnwind" customClass="CheckOuttoCheckInSegueUnwind" customModule="Devices" customModuleProvider="target" id="ESk-Iz-NgW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ade-ba-WBo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -430,8 +436,8 @@
         <image name="the_marauders_map_by_littlefallingstar-d5vf5do.png" width="1087" height="1266"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Gaf-1M-t5u"/>
-        <segue reference="gdi-2o-Pbm"/>
-        <segue reference="xrG-Lu-f0i"/>
+        <segue reference="ZeO-iG-p9o"/>
+        <segue reference="ESk-Iz-NgW"/>
+        <segue reference="Caf-Yk-bAC"/>
     </inferredMetricsTieBreakers>
 </document>
