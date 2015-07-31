@@ -31,7 +31,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
             let device = Device.sharedInstance
             device.setStatus(Checked.Out, updateTime: true)
             device.setUser(self.selectedUser!)
-            NetworkService.updateRemoteDevice()
+            NetworkService.updateStatus()
         }
     }
     
