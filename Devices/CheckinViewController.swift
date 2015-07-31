@@ -9,12 +9,16 @@
 import Foundation
 import UIKit
 
-class CheckinViewController: UIViewController {
+class CheckinViewController: UIViewController, UITableViewDataSource {
     
     private var activityIndicatorButton: UIActivityIndicatorView!
+    private var details = [String]()
     var containerDelegate: ContainerViewController!
     
+    private let RowHeight = CGFloat(44.0)
+    
     @IBOutlet weak var buttonCheckin: UIButton!
+    @IBOutlet weak var tableView: UITableView!
     
     @IBAction func CheckInPressed(sender: AnyObject) {
         self.startSpinningButton()
@@ -33,7 +37,13 @@ class CheckinViewController: UIViewController {
         self.buttonCheckin.layer.cornerRadius = 5.0
         
         let device = Device.sharedInstance
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        details = [
+            "Device Name: \(device.getFullName())",
+            "Status: \(device.getStatus().rawValue)",
+            "Owner: \(device.getUser() != nil ? device.getUser()!.fullName() : String())",
+            "Zone: \(device.getZone().rawValue)"
+        ]
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -69,5 +79,25 @@ class CheckinViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        
+        cell.textLabel!.text = details[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return details.count
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return RowHeight
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
 }

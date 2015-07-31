@@ -35,10 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             NetworkService.updateLocalDevice()
         }
         
-        self.beaconManager.delegate = self
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window!.rootViewController = self.containerVC
+        self.window!.makeKeyAndVisible()
         
-        let device = Device.sharedInstance
-        println(device.getFullName())
+        self.beaconManager.delegate = self
         
         self.beaconManager.requestAlwaysAuthorization()
         

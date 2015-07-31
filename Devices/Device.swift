@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-enum Checked {
-    case In
-    case Out
+enum Checked: String {
+    case In = "Checked In"
+    case Out = "Checked Out"
 }
 
 enum Zone: String{
