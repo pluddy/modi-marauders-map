@@ -17,6 +17,32 @@ class NetworkService {
     static let baseURL: String = "http://104.131.19.33:4000/"
     
     class func getUsers() {
+        let getEndpoint = NetworkService.baseURL + "users.json"
+        
+        request(.GET, getEndpoint).responseJSON { (request, response, data, error) in
+            if let anError = error {
+                println("error calling GET on /users.json")
+                println(error)
+            }
+            else if let data: AnyObject = data {
+                let post = JSON(data)
+                // now we have the results, let's just print them though a tableview would definitely be better UI:
+                println("The post is: " + post.description)
+                if let title = post["title"].string
+                {
+                    // to access a field:
+                    println("The title is: " + title)
+                }
+                else
+                {
+                    println("error parsing /posts/1")
+                }
+            }
+        }
+        
+        
+        
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             let getEndpoint = NetworkService.baseURL + "users.json"
             var urlRequest = NSURLRequest(URL: NSURL(string: getEndpoint)!)
