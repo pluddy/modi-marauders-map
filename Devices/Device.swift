@@ -148,6 +148,14 @@ class Device {
         return UIDevice.currentDevice().identifierForVendor.UUIDString
     }
     
+    func setColor(color: String) {
+        self.color = color
+    }
+    
+    func getColor() -> String {
+        return self.color
+    }
+    
     func getOsVersion() -> String {
         return UIDevice.currentDevice().systemVersion
     }

@@ -106,6 +106,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     
     func startSpinningButton() {
         self.buttonCheckout.setTitle("", forState: UIControlState.Normal)
+        self.buttonCheckout.enabled = false
         self.activityIndicatorButton.hidden = false
         self.activityIndicatorButton.startAnimating()
     }
@@ -119,6 +120,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     
     func stopSpinningButton() {
         self.activityIndicatorButton.hidden = true
+        self.buttonCheckout.enabled = true
         self.buttonCheckout.setTitle("Check Out", forState: UIControlState.Normal)
         self.activityIndicatorButton.stopAnimating()
     }
