@@ -12,13 +12,19 @@ import UIKit
 class CheckinViewController: UIViewController {
     
     private var activityIndicatorButton: UIActivityIndicatorView!
+    var containerDelegate: ContainerViewController!
     
     @IBOutlet weak var buttonCheckin: UIButton!
+    
     @IBAction func CheckInPressed(sender: AnyObject) {
         self.startSpinningButton()
         //Update Server async
-        self.performSegueWithIdentifier("idCheckIntoCheckOutSegue", sender: self)
+        let device = Device.sharedInstance
+        device.setStatus(Checked.In, updateTime: true)
+        device.setUser(nil)
+        NetworkService.updateStatus()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +37,8 @@ class CheckinViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateRemoteDeviceFinished:"), name: NotifUpdateRemoteDeviceDidComplete, object: nil)
+        
         let yCoord = (buttonCheckin.frame.height / 2) + buttonCheckin.frame.origin.y
         let xCoord = (buttonCheckin.frame.width / 2) + buttonCheckin.frame.origin.x
         activityIndicatorButton.center = CGPoint(x: xCoord, y: yCoord)
@@ -38,15 +46,24 @@ class CheckinViewController: UIViewController {
     }
     
     func startSpinningButton() {
-        self.buttonCheckin.titleLabel?.text = ""
+        self.buttonCheckin.setTitle("", forState: UIControlState.Normal)
         self.activityIndicatorButton.hidden = false
-        
+        self.buttonCheckin.enabled = false
+
         self.activityIndicatorButton.startAnimating()
     }
     func stopSpinningButton() {
         self.activityIndicatorButton.hidden = true
-        self.buttonCheckin.titleLabel?.text = "Check In"
+        self.buttonCheckin.enabled = true
+        self.buttonCheckin.setTitle("Check In", forState: UIControlState.Normal)
         self.activityIndicatorButton.stopAnimating()
+    }
+    
+    func updateRemoteDeviceFinished(notification: NSNotification) {
+        self.stopSpinningButton()
+        let vc = ViewController.CheckOut.viewController(self.containerDelegate)
+        self.containerDelegate.switchToViewController(vc)
+//        self.performSegueWithIdentifier("idCheckIntoCheckOutSegue", sender: self)
     }
     
     override func didReceiveMemoryWarning() {

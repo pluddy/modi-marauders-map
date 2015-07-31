@@ -174,7 +174,6 @@ class Device {
     
     func getCapacity() -> String {
         var totalSpace: UInt64 = 0
-        var totalFreeSpace: UInt64 = 0
         var errorPtr = NSErrorPointer()
         var paths: NSArray = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray
         let path = paths.lastObject as! String
@@ -184,7 +183,7 @@ class Device {
             totalSpace = fileSystemSizeInBytes.unsignedLongLongValue
         }
         
-        return String(totalSpace / 1073741824) + "GB"
+        return String(totalSpace >> 30) + "GB"
     }
     
     func getDevice() -> String {

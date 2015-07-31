@@ -115,7 +115,7 @@ class NetworkService {
             }
             else if let data: AnyObject = data {
                 let json = JSON(data)
-                println(json)
+                println(json.description)
                 dispatch_async(dispatch_get_main_queue(), {
                     NSNotificationCenter.defaultCenter().postNotificationName(NotifRegisterDeviceDidComplete, object: nil)
                 })
@@ -127,7 +127,7 @@ class NetworkService {
         let device = Device.sharedInstance
         let udid = device.getId()
         let checkedOut = device.getStatus() == Checked.Out
-        let userId = device.getUser() != nil ? device.getUser()!.id : nil
+        let userId = device.getUser() != nil ? device.getUser()!.id : ""
         
         let params = [
             "responseType": "json",
@@ -148,6 +148,20 @@ class NetworkService {
             "responseType": "json",
             "udid": device.getId(),
             "zone": zone
+            ] as [String : AnyObject]
+        
+        NetworkService.updateRemoteDevice(params)
+    }
+    
+    class func updateName() {
+        let device = Device.sharedInstance
+        let name = device.getFullName()
+        let udid = device.getId()
+        
+        let params = [
+            "responseType": "json",
+            "udid": device.getId(),
+            "name": name
             ] as [String : AnyObject]
         
         NetworkService.updateRemoteDevice(params)
@@ -176,7 +190,7 @@ class NetworkService {
             }
             else if let data: AnyObject = data {
                 let json = JSON(data)
-                println(json)
+                println(json.description)
             }
             
             dispatch_async(dispatch_get_main_queue(), {

@@ -17,18 +17,23 @@ class SettingsViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func indexChanged(sender: UISegmentedControl) {
+        let device = Device.sharedInstance
         switch sender.selectedSegmentIndex
         {
         case 0:
-            Device.sharedInstance
+            device.setColor("Black")
             break
         case 1:
+            device.setColor("White")
             break
         case 2:
+            device.setColor("Gold")
             break
         default:
             break
         }
+        
+        NetworkService.updateName()
     }
 
     func locationLabelText(var zone:Zone) {

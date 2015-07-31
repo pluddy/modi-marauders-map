@@ -10,6 +10,8 @@ import UIKit
 
 class OnboardViewController: UIViewController {
     
+    var containerDelegate: ContainerViewController!
+    
     @IBOutlet weak var mapPageLeft: UIImageView!
     @IBOutlet weak var mapPageRight: UIImageView!
     @IBOutlet weak var mapInk: UIImageView!

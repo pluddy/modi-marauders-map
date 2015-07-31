@@ -9,9 +9,41 @@
 import Foundation
 import UIKit
 
+enum ViewController {
+    case OnBoarding
+    case CheckIn
+    case CheckOut
+    
+    func viewController(container: ContainerViewController) -> UIViewController {
+        switch (self) {
+        case OnBoarding:
+            let vc = UIStoryboard.onboardViewController()
+            vc.containerDelegate = container
+            return vc
+        case CheckIn:
+            let vc = UIStoryboard.checkinViewController()
+            vc.containerDelegate = container
+            return vc
+        case CheckOut:
+            let vc = UIStoryboard.checkoutViewController()
+            vc.containerDelegate = container
+            return vc
+        default:
+            return UIViewController()
+        }
+    }
+}
+
 extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard {
         return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+    }
+    
+    class func containerViewController() -> ContainerViewController {
+        if let vc = mainStoryboard().instantiateViewControllerWithIdentifier("ContainerViewController") as? ContainerViewController {
+            return vc
+        }
+        return ContainerViewController()
     }
     
     class func checkinViewController() -> CheckinViewController {

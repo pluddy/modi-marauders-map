@@ -10,6 +10,8 @@ import UIKit
 
 class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
+    var containerDelegate: ContainerViewController!
+    
     private let RowHeight: CGFloat = 44.0
     
     private var searchActive = false
@@ -79,7 +81,10 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     }
     
     func updateRemoteDeviceFinished(notification: NSNotification) {
-        self.performSegueWithIdentifier("idCheckOuttoCheckInSegue", sender: self)
+        self.stopSpinningButton()
+        let vc = ViewController.CheckIn.viewController(self.containerDelegate)
+        self.containerDelegate.switchToViewController(vc)
+//        self.performSegueWithIdentifier("idCheckOuttoCheckInSegue", sender: self)
     }
     
     func styleButton() {

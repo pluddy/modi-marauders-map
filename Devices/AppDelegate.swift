@@ -12,40 +12,28 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
 
     var window: UIWindow?
+    var containerVC: ContainerViewController!
     
-    var isFirstLaunch = false
-
     let NotifDeviceZoneDidChange = "NotifDeviceZoneDidChange"
     let beaconManager = ESTBeaconManager()
     let NotificationCheckOutCategoryId = "CHECK_IN"
     let NotificationCheckOutActionId = "ACTION_CHECK_IN"
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        self.containerVC = UIStoryboard.containerViewController()
+        
         if (!NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce")) {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
             NSUserDefaults.standardUserDefaults().synchronize()
-            isFirstLaunch = true
+            
+            // not changing???
+            containerVC.isFirstLaunch = true
             
             NetworkService.registerDevice()
         }
         else {
             NetworkService.updateLocalDevice()
         }
-        
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-
-        if (isFirstLaunch) {
-            self.window!.rootViewController = UIStoryboard.onboardViewController()
-        }
-        else if (Device.sharedInstance.getStatus() != Checked.In){
-            self.window!.rootViewController = UIStoryboard.checkinViewController()
-        }
-        else {
-            self.window!.rootViewController = UIStoryboard.checkoutViewController()
-        }
-        self.window!.makeKeyAndVisible()
-        
-        println(UIDevice.currentDevice().identifierForVendor.UUIDString)
         
         self.beaconManager.delegate = self
         
