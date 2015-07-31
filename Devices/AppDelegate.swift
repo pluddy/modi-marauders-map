@@ -12,35 +12,32 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
 
     var window: UIWindow?
-    var storyboard: UIStoryboard?
-    var checkinViewController: UIViewController?
-    var checkoutViewController: UIViewController?
+    
+    var isFirstLaunch = false
 
     let NotifDeviceZoneDidChange = "NotifDeviceZoneDidChange"
     let beaconManager = ESTBeaconManager()
     let NotificationCheckOutCategoryId = "CHECK_IN"
     let NotificationCheckOutActionId = "ACTION_CHECK_IN"
     
-    var beaconCart = false
-    var beaconWest = false
-    var beaconEast = false
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if (!NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce")) {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
             NSUserDefaults.standardUserDefaults().synchronize()
-            
+            isFirstLaunch = true
             //TODO: Register device with the server
         }
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        self.checkinViewController = storyboard!.instantiateViewControllerWithIdentifier("CheckinViewController") as? UIViewController
-        self.checkoutViewController = storyboard!.instantiateViewControllerWithIdentifier("CheckoutViewController") as? UIViewController
-        if (Device.sharedInstance.getStatus() != Checked.In){
-            self.window!.rootViewController = checkinViewController
-        } else {
-            self.window!.rootViewController = checkoutViewController
+
+        if (isFirstLaunch) {
+            self.window!.rootViewController = UIStoryboard.onboardViewController()
+        }
+        else if (Device.sharedInstance.getStatus() != Checked.In){
+            self.window!.rootViewController = UIStoryboard.checkinViewController()
+        }
+        else {
+            self.window!.rootViewController = UIStoryboard.checkoutViewController()
         }
         self.window!.makeKeyAndVisible()
         
@@ -136,19 +133,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     
     func updateDeviceZoneFromActiveBeacons() {
         var newZone: Zone
-        if (beaconCart) {
-            newZone = Zone.Cart
-        } else if (beaconWest && beaconEast) {
-            newZone = Zone.Middle
-        } else if (!beaconWest && beaconEast) {
-            newZone = Zone.East
-        } else if (beaconWest && !beaconEast) {
-            newZone = Zone.West
-        } else {
-            newZone = Zone.Unknown
-        }
+//        if (beaconCart) {
+//            newZone = Zone.Cart
+//        } else if (beaconWest && beaconEast) {
+//            newZone = Zone.Middle
+//        } else if (!beaconWest && beaconEast) {
+//            newZone = Zone.East
+//        } else if (beaconWest && !beaconEast) {
+//            newZone = Zone.West
+//        } else {
+//            newZone = Zone.Unknown
+//        }
         
-        Device.sharedInstance.setLocation(newZone)
+        //Device.sharedInstance.setLocation(newZone)
         NSNotificationCenter.defaultCenter().postNotificationName(NotifDeviceZoneDidChange, object: nil)
     }
     

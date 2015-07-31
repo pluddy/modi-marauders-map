@@ -16,6 +16,17 @@ class SettingsViewController: UIViewController {
     @IBAction func DismissSettings(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    @IBAction func indexChanged(sender: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            Device.sharedInstance
+        case 1:
+        case 2:
+        default:
+            break; 
+        }
+    }
 
     func locationLabelText(var zone:Zone) {
         switch (zone){
