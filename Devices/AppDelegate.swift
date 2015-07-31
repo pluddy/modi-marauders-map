@@ -12,6 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
 
     var window: UIWindow?
+    var storyboard: UIStoryboard?
+    var checkinViewController: UIViewController?
+    var checkoutViewController: UIViewController?
 
     let NotifDeviceZoneDidChange = "NotifDeviceZoneDidChange"
     let beaconManager = ESTBeaconManager()
@@ -22,14 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     var beaconWest = false
     var beaconEast = false
     
-    func newRootViewController(vc: UIViewController) {
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let storyboard = UIStoryboard.mainStoryboard()
-        
-        self.window!.rootViewController = vc
-        self.window!.makeKeyAndVisible()
-    }
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if (!NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce")) {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
@@ -37,7 +32,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             
             NetworkService.registerDevice()
         }
-        UINavigationBar.appearance()
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        self.checkinViewController = storyboard!.instantiateViewControllerWithIdentifier("CheckinViewController") as? UIViewController
+        self.checkoutViewController = storyboard!.instantiateViewControllerWithIdentifier("CheckoutViewController") as? UIViewController
+        if (Device.sharedInstance.getStatus() != Checked.In){
+            self.window!.rootViewController = checkinViewController
+        } else {
+            self.window!.rootViewController = checkoutViewController
+        }
+        self.window!.makeKeyAndVisible()
+        
+        println(UIDevice.currentDevice().identifierForVendor.UUIDString)
         
         // remove!!
         NetworkService.registerDevice()
@@ -94,17 +101,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     }
     
     func beaconManager(manager: AnyObject!, didEnterRegion region: CLBeaconRegion!) {
+        var newZone: Zone
         switch(region.identifier){
         case "blueberryCart":
-            beaconCart = true
+            //Device Entered cart: check in prompt
+            var notification = UILocalNotification()
+            notification.alertBody = "";
+            newZone = Zone.Cart
             println("Entered Blueberry Cart Zone")
             break
         case "iceEast":
-            beaconEast = true
+            newZone = Zone.East
             println("Entered Ice East Zone")
             break
         case "mintWest":
-            beaconWest = true
+            newZone = Zone.West
             println("Entered Mint West Zone")
             break
         default:
@@ -116,15 +127,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     func beaconManager(manager: AnyObject!, didExitRegion region: CLBeaconRegion!) {
         switch(region.identifier){
         case "blueberryCart":
-            beaconCart = false
+            //Device Left Cart: check out prompt
             println("Exited Blueberry Cart Zone")
             break
         case "iceEast":
-            beaconEast = false
             println("Exited Ice East Zone")
             break
         case "mintWest":
-            beaconWest = false
             println("Exited Mint West Zone")
             break
         default:
@@ -153,24 +162,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
         UIApplication.sharedApplication().openURL(NSURL(string: "http://www.github.com")!)
-    }
-    
-    func registerForNotification() {
-        let checkoutAction = UIMutableUserNotificationAction()
-        checkoutAction.activationMode = UIUserNotificationActivationMode.Background
-        checkoutAction.title = "Check Out"
-        checkoutAction.identifier = NotificationCheckOutActionId
-        checkoutAction.destructive = false
-        checkoutAction.authenticationRequired = false
-        
-        let checkoutCategory = UIMutableUserNotificationCategory()
-        checkoutCategory.identifier = NotificationCheckOutCategoryId
-        checkoutCategory.setActions([checkoutAction], forContext: UIUserNotificationActionContext.Default)
-        
-        let categories = Set<UIUserNotificationCategory>([checkoutCategory])
-        let checkoutSettings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: categories)
-        
-        UIApplication.sharedApplication().registerUserNotificationSettings(checkoutSettings)
     }
 }
 

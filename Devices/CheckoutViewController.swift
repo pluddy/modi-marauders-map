@@ -18,6 +18,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     private var selectedUser: User?
     
     private var activityIndicator: UIActivityIndicatorView!
+    private var activityIndicatorButton: UIActivityIndicatorView!
 
     @IBOutlet weak var constraintSearchBarToNavBar: NSLayoutConstraint!
     @IBOutlet var buttonCheckout: UIButton!
@@ -25,21 +26,20 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     @IBOutlet var tableView: UITableView!
     
     @IBAction func checkout(sender: AnyObject) {
+        self.startSpinningButton()
         if (selectedUser != nil) {
             let device = Device.sharedInstance
             device.setStatus(Checked.Out, updateTime: true)
             device.setUser(self.selectedUser!)
-
-            let vc = UIStoryboard.checkinViewController()
-            let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.newRootViewController(vc)
         }
+        self.performSegueWithIdentifier("idCheckOuttoCheckInSegue", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        activityIndicatorButton = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         
         self.styleButton()
         self.tableView.reloadData()
@@ -49,12 +49,17 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("newUsers:"), name: NotifGetUsersFromNetworkDidComplete, object: nil)
         
         NetworkService.getUsers()
-        self.startSpinning()
+        self.startSpinningTable()
         
-        let yCoord = (tableView.frame.height / 2) + tableView.frame.origin.y
-        let xCoord = (tableView.frame.width / 2) + tableView.frame.origin.x
+        var yCoord = (tableView.frame.height / 2) + tableView.frame.origin.y
+        var xCoord = (tableView.frame.width / 2) + tableView.frame.origin.x
         activityIndicator.center = CGPoint(x: xCoord, y: yCoord)
         self.view.addSubview(activityIndicator)
+        
+        yCoord = (buttonCheckout.frame.height / 2) + buttonCheckout.frame.origin.y
+        xCoord = (buttonCheckout.frame.width / 2) + buttonCheckout.frame.origin.x
+        activityIndicatorButton.center = CGPoint(x: xCoord, y: yCoord)
+        self.view.addSubview(activityIndicatorButton)
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -67,7 +72,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         }
         
         self.tableView.reloadData()
-        self.stopSpinning()
+        self.stopSpinningTable()
 //        dispatch_async(dispatch_get_main_queue(), {
 //            self.tableView.reloadData()
 //            self.stopSpinning()
@@ -90,17 +95,29 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         })
     }
     
-    func startSpinning() {
+    func startSpinningTable() {
         self.tableView.hidden = true
         self.activityIndicator.hidden = false
         self.activityIndicator.startAnimating()
     }
     
-    func stopSpinning() {
+    func startSpinningButton() {
+        self.buttonCheckout.titleLabel?.text = ""
+        self.activityIndicatorButton.hidden = false
+        self.activityIndicatorButton.startAnimating()
+    }
+    
+    func stopSpinningTable() {
         self.activityIndicator.hidden = true
         self.activityIndicator.stopAnimating()
         self.tableView.hidden = false
         self.tableView.reloadData()
+    }
+    
+    func stopSpinningButton() {
+        self.activityIndicatorButton.hidden = true
+        self.buttonCheckout.titleLabel?.text = "Check Out"
+        self.activityIndicatorButton.stopAnimating()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -125,7 +142,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         
         showButton(true)
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        //tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.searchField.resignFirstResponder()
     }
     

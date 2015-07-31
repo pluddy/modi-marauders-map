@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -98,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNv-hU-S4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-188" y="551"/>
+            <point key="canvasLocation" x="182" y="-23"/>
         </scene>
         <!--Checkout View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -135,7 +135,7 @@
                                     <constraint firstAttribute="height" constant="60" id="8xp-MT-luc"/>
                                     <constraint firstAttribute="width" constant="239" id="fo6-Mj-8SU"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="TradeGothicLT" family="Trade Gothic LT" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="TradeGothicLT" family="Trade Gothic LT" pointSize="20"/>
                                 <state key="normal" title="Checkout">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -210,11 +210,12 @@
                         <outlet property="constraintSearchBarToNavBar" destination="Slt-LG-yzr" id="XJq-Lw-cbx"/>
                         <outlet property="searchField" destination="G6y-Ua-bvW" id="ckd-te-Sk2"/>
                         <outlet property="tableView" destination="fpq-OG-iCA" id="kx9-0P-0zM"/>
+                        <segue destination="Dxv-20-Hbt" kind="custom" identifier="idCheckOuttoCheckInSegue" customClass="CheckOuttoCheckInSegue" customModule="Devices" customModuleProvider="target" id="ysQ-Ju-Wmm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="182" y="-369"/>
+            <point key="canvasLocation" x="-654" y="-417"/>
         </scene>
         <!--Checkin View Controller-->
         <scene sceneID="1MB-BM-pXU">
@@ -250,44 +251,49 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="r26-1b-Ztg">
-                                <rect key="frame" x="16" y="68" width="568" height="390"/>
+                                <rect key="frame" x="16" y="68" width="568" height="436"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrA-i1-592">
-                                <rect key="frame" x="16" y="466" width="568" height="126"/>
+                                <rect key="frame" x="181" y="522" width="239" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="126" id="92t-Mu-fZF"/>
+                                    <constraint firstAttribute="width" constant="239" id="E0l-su-eSt"/>
+                                    <constraint firstAttribute="height" constant="60" id="fea-v1-SqC"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="TradeGothicLT" family="Trade Gothic LT" pointSize="30"/>
+                                <fontDescription key="fontDescription" name="TradeGothicLT" family="Trade Gothic LT" pointSize="20"/>
                                 <state key="normal" title="Check In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="SpM-Mb-nwM"/>
+                                    <action selector="CheckInPressed:" destination="Dxv-20-Hbt" eventType="touchUpInside" id="Dn5-0r-d79"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="jrA-i1-592" firstAttribute="top" secondItem="r26-1b-Ztg" secondAttribute="bottom" constant="18" id="2lC-5S-hzb"/>
                             <constraint firstAttribute="centerX" secondItem="YGl-mT-kew" secondAttribute="centerX" id="3t1-kl-f9g"/>
-                            <constraint firstItem="r26-1b-Ztg" firstAttribute="top" secondItem="YGl-mT-kew" secondAttribute="bottom" constant="8" id="Wo2-1e-fin"/>
-                            <constraint firstItem="jrA-i1-592" firstAttribute="trailing" secondItem="NAd-PJ-NMd" secondAttribute="trailingMargin" id="amB-qL-FSM"/>
-                            <constraint firstItem="GFl-cf-8x3" firstAttribute="top" secondItem="jrA-i1-592" secondAttribute="bottom" constant="8" id="bkA-eu-vKa"/>
+                            <constraint firstItem="jrA-i1-592" firstAttribute="top" secondItem="r26-1b-Ztg" secondAttribute="bottom" constant="18" id="IZ1-md-Qdi"/>
+                            <constraint firstAttribute="centerX" secondItem="jrA-i1-592" secondAttribute="centerX" id="Lbv-n1-kXc"/>
+                            <constraint firstItem="GFl-cf-8x3" firstAttribute="top" secondItem="jrA-i1-592" secondAttribute="bottom" constant="18" id="O3w-gI-9iv"/>
                             <constraint firstItem="YGl-mT-kew" firstAttribute="centerY" secondItem="BCM-PE-CqJ" secondAttribute="centerY" id="dmF-JJ-8Bn"/>
-                            <constraint firstItem="r26-1b-Ztg" firstAttribute="trailing" secondItem="NAd-PJ-NMd" secondAttribute="trailingMargin" id="gyK-id-RbM"/>
-                            <constraint firstItem="jrA-i1-592" firstAttribute="top" secondItem="r26-1b-Ztg" secondAttribute="bottom" constant="8" id="hoc-Ia-foV"/>
+                            <constraint firstItem="r26-1b-Ztg" firstAttribute="top" secondItem="YGl-mT-kew" secondAttribute="bottom" constant="8" id="k4B-qX-1SL"/>
+                            <constraint firstItem="r26-1b-Ztg" firstAttribute="trailing" secondItem="NAd-PJ-NMd" secondAttribute="trailingMargin" id="ntL-qB-ZrJ"/>
                             <constraint firstItem="BCM-PE-CqJ" firstAttribute="trailing" secondItem="NAd-PJ-NMd" secondAttribute="trailingMargin" id="oFn-TY-ba7"/>
-                            <constraint firstItem="jrA-i1-592" firstAttribute="leading" secondItem="NAd-PJ-NMd" secondAttribute="leadingMargin" id="pGs-3S-YYY"/>
                             <constraint firstItem="YGl-mT-kew" firstAttribute="top" secondItem="pd9-mP-ZRL" secondAttribute="bottom" constant="8" id="rUj-xd-YJZ"/>
-                            <constraint firstItem="r26-1b-Ztg" firstAttribute="leading" secondItem="NAd-PJ-NMd" secondAttribute="leadingMargin" id="zBB-Uh-KPe"/>
+                            <constraint firstItem="r26-1b-Ztg" firstAttribute="leading" secondItem="NAd-PJ-NMd" secondAttribute="leadingMargin" id="uaX-HR-69g"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buttonCheckin" destination="jrA-i1-592" id="Odn-ez-8ln"/>
+                        <segue destination="BYZ-38-t0r" kind="custom" identifier="idCheckIntoCheckOutSegue" customClass="CheckIntoCheckOutSegue" customModule="Devices" customModuleProvider="target" id="lX9-Jj-g7c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ade-ba-WBo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-566" y="-369"/>
+            <point key="canvasLocation" x="-654" y="391"/>
         </scene>
     </scenes>
     <resources>

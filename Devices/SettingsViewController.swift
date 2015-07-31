@@ -46,6 +46,8 @@ class SettingsViewController: UIViewController {
         let device = Device.sharedInstance
         
         
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
