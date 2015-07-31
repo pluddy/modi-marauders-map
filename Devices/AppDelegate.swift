@@ -25,7 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
             NSUserDefaults.standardUserDefaults().synchronize()
             isFirstLaunch = true
-            //TODO: Register device with the server
+            
+            NetworkService.registerDevice()
+        }
+        else {
+            NetworkService.updateLocalDevice()
         }
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -44,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         println(UIDevice.currentDevice().identifierForVendor.UUIDString)
         
         self.beaconManager.delegate = self
+        
+        let device = Device.sharedInstance
+        println(device.getFullName())
         
         self.beaconManager.requestAlwaysAuthorization()
         
@@ -133,10 +140,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     
     func updateDeviceZoneFromActiveBeacons() {
         var newZone: Zone
+
 //        if (beaconCart) {
 //            newZone = Zone.Cart
-//        } else if (beaconWest && beaconEast) {
-//            newZone = Zone.Middle
 //        } else if (!beaconWest && beaconEast) {
 //            newZone = Zone.East
 //        } else if (beaconWest && !beaconEast) {
@@ -144,8 +150,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
 //        } else {
 //            newZone = Zone.Unknown
 //        }
-        
-        //Device.sharedInstance.setLocation(newZone)
+//        
+//        Device.sharedInstance.setZone(newZone)
         NSNotificationCenter.defaultCenter().postNotificationName(NotifDeviceZoneDidChange, object: nil)
     }
     

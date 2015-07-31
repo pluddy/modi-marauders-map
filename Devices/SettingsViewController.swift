@@ -17,14 +17,17 @@ class SettingsViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func indexChanged(sender: UISegmentedControl) {
-        switch segmentedControl.selectedSegmentIndex
+        switch sender.selectedSegmentIndex
         {
         case 0:
             Device.sharedInstance
+            break
         case 1:
+            break
         case 2:
+            break
         default:
-            break; 
+            break
         }
     }
 
@@ -35,9 +38,6 @@ class SettingsViewController: UIViewController {
             break
         case Zone.East:
             locationLabel.text = "Location: East"
-            break
-        case Zone.Middle:
-            locationLabel.text = "Location: Middle"
             break
         case Zone.Cart:
             locationLabel.text = "Location: Cart"

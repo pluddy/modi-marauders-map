@@ -21,7 +21,7 @@ class OnboardViewController: UIViewController {
     @IBOutlet weak var buttonMischief: UIButton!
     
     @IBAction func mischiefManaged(sender: AnyObject) {
-        if(
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()

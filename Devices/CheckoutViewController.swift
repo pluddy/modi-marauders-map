@@ -29,10 +29,10 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         self.startSpinningButton()
         if (selectedUser != nil) {
             let device = Device.sharedInstance
-            device.setStatus(Checked.Out)
+            device.setStatus(Checked.Out, updateTime: true)
             device.setUser(self.selectedUser!)
+            NetworkService.updateStatus()
         }
-        self.performSegueWithIdentifier("idCheckOuttoCheckInSegue", sender: self)
     }
     
     override func viewDidLoad() {
@@ -41,13 +41,16 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         activityIndicatorButton = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("newUsers:"), name: NotifGetUsersFromNetworkDidComplete, object: nil)
-        
         self.styleButton()
         self.tableView.reloadData()
     }
     
     override func viewDidAppear(animated: Bool) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: Selector("newUsers:"), name: NotifGetUsersFromNetworkDidComplete, object: nil)
+        notificationCenter.addObserver(self, selector: Selector("updateRemoteDeviceFinished:"), name: NotifUpdateRemoteDeviceDidComplete, object: nil)
+        
+        
         NetworkService.getUsers()
         self.startSpinningTable()
         
@@ -71,10 +74,12 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
             self.allUsers = info[NotifUserInfoPayload] as! [User]
         }
         
-        dispatch_async(dispatch_get_main_queue(), {
-            self.tableView.reloadData()
-            self.stopSpinningTable()
-        })
+        self.tableView.reloadData()
+        self.stopSpinningTable()
+    }
+    
+    func updateRemoteDeviceFinished(notification: NSNotification) {
+        self.performSegueWithIdentifier("idCheckOuttoCheckInSegue", sender: self)
     }
     
     func styleButton() {
@@ -100,7 +105,8 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     }
     
     func startSpinningButton() {
-        self.buttonCheckout.titleLabel?.text = ""
+        self.buttonCheckout.setTitle("", forState: UIControlState.Normal)
+        self.buttonCheckout.enabled = false
         self.activityIndicatorButton.hidden = false
         self.activityIndicatorButton.startAnimating()
     }
@@ -114,7 +120,8 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     
     func stopSpinningButton() {
         self.activityIndicatorButton.hidden = true
-        self.buttonCheckout.titleLabel?.text = "Check Out"
+        self.buttonCheckout.enabled = true
+        self.buttonCheckout.setTitle("Check Out", forState: UIControlState.Normal)
         self.activityIndicatorButton.stopAnimating()
     }
     
