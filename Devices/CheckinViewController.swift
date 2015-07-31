@@ -51,7 +51,7 @@ class CheckinViewController: UIViewController, UITableViewDataSource {
     }
     
     override func viewDidAppear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateRemoteDeviceFinished:"), name: NotifUpdateRemoteDeviceDidComplete, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateRemoteDeviceFinished:"), name: NotifStatusUpdateRemoteDeviceDidComplete, object: nil)
         
         let yCoord = (buttonCheckin.frame.height / 2) + buttonCheckin.frame.origin.y
         let xCoord = (buttonCheckin.frame.width / 2) + buttonCheckin.frame.origin.x

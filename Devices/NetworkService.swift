@@ -10,7 +10,9 @@ import Foundation
 
 let NotifGetUsersFromNetworkDidComplete: String = "NotifGetUsersFromNetworkDidComplete"
 let NotifUpdateLocalDeviceDidComplete: String = "NotifUpdateLocalDeviceDidComplete"
-let NotifUpdateRemoteDeviceDidComplete: String = "NotifUpdateRemoteDeviceDidComplete"
+let NotifZoneUpdateRemoteDeviceDidComplete: String = "NotifZoneUpdateRemoteDeviceDidComplete"
+let NotifStatusUpdateRemoteDeviceDidComplete: String = "NotifStatusUpdateRemoteDeviceDidComplete"
+let NotifNameUpdateRemoteDeviceDidComplete: String = "NotifNameUpdateRemoteDeviceDidComplete"
 let NotifRegisterDeviceDidComplete: String = "NotifRegisterDeviceDidComplete"
 let NotifUserInfoPayload: String = "NotifUserInfoPayload"
 
@@ -136,7 +138,7 @@ class NetworkService {
             ("userId", userId)
         ] as [(String, String)]
         
-        NetworkService.updateRemoteDevice(params)
+        NetworkService.updateRemoteDevice(params, notif: NotifStatusUpdateRemoteDeviceDidComplete)
     }
     
     class func updateZone() {
@@ -150,7 +152,7 @@ class NetworkService {
             ("zone", zone)
             ] as [(String, String)]
         
-        NetworkService.updateRemoteDevice(params)
+        NetworkService.updateRemoteDevice(params, notif: NotifZoneUpdateRemoteDeviceDidComplete)
     }
     
     class func updateName() {
@@ -164,10 +166,10 @@ class NetworkService {
             ("name", name)
             ] as [(String, String)]
         
-        NetworkService.updateRemoteDevice(params)
+        NetworkService.updateRemoteDevice(params, notif: NotifNameUpdateRemoteDeviceDidComplete)
     }
     
-    class func updateRemoteDevice(params: [(String, String)]) {
+    class func updateRemoteDevice(params: [(String, String)], notif: String) {
         let device = Device.sharedInstance
 //        let zone = device.getZone().rawValue
 //        let udid = device.getId()
@@ -204,7 +206,7 @@ class NetworkService {
             }
             
             dispatch_async(dispatch_get_main_queue(), {
-                NSNotificationCenter.defaultCenter().postNotificationName(NotifUpdateRemoteDeviceDidComplete, object: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName(notif, object: nil)
             })
         }
     }

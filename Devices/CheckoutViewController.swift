@@ -57,7 +57,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     override func viewDidAppear(animated: Bool) {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: Selector("newUsers:"), name: NotifGetUsersFromNetworkDidComplete, object: nil)
-        notificationCenter.addObserver(self, selector: Selector("updateRemoteDeviceFinished:"), name: NotifUpdateRemoteDeviceDidComplete, object: nil)
+        notificationCenter.addObserver(self, selector: Selector("updateRemoteDeviceFinished:"), name: NotifStatusUpdateRemoteDeviceDidComplete, object: nil)
         
         
         NetworkService.getUsers()
