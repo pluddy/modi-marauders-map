@@ -30,6 +30,7 @@
 		B008B7BE1B6B104C001BC4CC /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7B31B6B104C001BC4CC /* ServerTrustPolicy.swift */; };
 		B008B7BF1B6B104C001BC4CC /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7B41B6B104C001BC4CC /* Upload.swift */; };
 		B008B7C01B6B104C001BC4CC /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7B51B6B104C001BC4CC /* Validation.swift */; };
+		B008B7C31B6B1332001BC4CC /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008B7C21B6B1332001BC4CC /* SwiftyJSON.swift */; };
 		B0A9A2CC1B684C870093DB80 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B0A9A2CB1B684C870093DB80 /* Fonts */; };
 		B0A9A2D41B6856B70093DB80 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A9A2D31B6856B70093DB80 /* NotificationCenter.framework */; };
 		B0A9A2D71B6856B70093DB80 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A9A2D61B6856B70093DB80 /* TodayViewController.swift */; };
@@ -102,6 +103,7 @@
 		B008B7B31B6B104C001BC4CC /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		B008B7B41B6B104C001BC4CC /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		B008B7B51B6B104C001BC4CC /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		B008B7C21B6B1332001BC4CC /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		B080B1401B671DE70096FB7F /* ObjCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
 		B0A9A2CB1B684C870093DB80 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		B0A9A2D21B6856B70093DB80 /* Devices Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Devices Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +159,7 @@
 		6E4E719E1B697544002F3266 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B008B7C41B6B1339001BC4CC /* SwiftyJSON */,
 				B008B7A91B6B104C001BC4CC /* Alamofire */,
 				6E77B94B1B6A630D00738E6A /* NetworkService.swift */,
 			);
@@ -242,6 +245,14 @@
 			);
 			name = Alamofire;
 			path = Source;
+			sourceTree = "<group>";
+		};
+		B008B7C41B6B1339001BC4CC /* SwiftyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				B008B7C21B6B1332001BC4CC /* SwiftyJSON.swift */,
+			);
+			name = SwiftyJSON;
 			sourceTree = "<group>";
 		};
 		B065D70A1B684C1E00802B83 /* Resources */ = {
@@ -575,6 +586,7 @@
 				B008B7BF1B6B104C001BC4CC /* Upload.swift in Sources */,
 				B008B7BB1B6B104C001BC4CC /* ParameterEncoding.swift in Sources */,
 				6E77B94C1B6A630D00738E6A /* NetworkService.swift in Sources */,
+				B008B7C31B6B1332001BC4CC /* SwiftyJSON.swift in Sources */,
 				B008B79F1B6ABBE9001BC4CC /* CheckOuttoCheckInSegue.swift in Sources */,
 				B008B7BD1B6B104C001BC4CC /* ResponseSerialization.swift in Sources */,
 				B008B7BA1B6B104C001BC4CC /* MultipartFormData.swift in Sources */,
