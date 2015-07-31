@@ -54,6 +54,20 @@ class ContainerViewController: UIViewController {
         self.currentViewController = vc
     }
     
+    func checkinOrCheckout() -> UIViewController {
+        var vc: UIViewController!
+        if (Device.sharedInstance.getStatus() != Checked.In) {
+            // checkin
+            vc = ViewController.CheckIn.viewController(self)
+        }
+        else {
+            // checkout
+            vc = ViewController.CheckOut.viewController(self)
+        }
+        
+        return vc
+    }
+    
     func switchToViewController(newVC: UIViewController) {
         if let oldVC = self.currentViewController {
             self.view.addSubview(newVC.view)

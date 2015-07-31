@@ -17,16 +17,20 @@ class CheckinViewController: UIViewController, UITableViewDataSource {
     
     private let RowHeight = CGFloat(44.0)
     
-    @IBOutlet weak var buttonCheckin: UIButton!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var buttonCheckin: UIButton!
+    @IBOutlet var tableView: UITableView!
     
     @IBAction func CheckInPressed(sender: AnyObject) {
         self.startSpinningButton()
-        //Update Server async
         let device = Device.sharedInstance
         device.setStatus(Checked.In, updateTime: true)
         device.setUser(nil)
         NetworkService.updateStatus()
+    }
+    
+    @IBAction func settingsPressed(sender: AnyObject) {
+        let vc = ViewController.Settings.viewController(self.containerDelegate)
+        containerDelegate.switchToViewController(vc)
     }
     
     override func viewDidLoad() {

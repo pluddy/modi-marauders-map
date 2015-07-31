@@ -61,8 +61,8 @@
                                     <constraint firstAttribute="width" constant="183" id="Jts-RC-Bus"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="White"/>
                                     <segment title="Black"/>
+                                    <segment title="White"/>
                                     <segment title="Gold"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,6 +81,10 @@
                             <constraint firstItem="FFp-6j-Jnx" firstAttribute="top" secondItem="7EC-Gl-MGx" secondAttribute="bottom" constant="11" id="uHW-ch-UEh"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="segmentedDeviceColor" destination="FFp-6j-Jnx" id="0YI-gS-Onc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNv-hU-S4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -141,7 +145,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2s3-kc-Igt" kind="presentation" id="Caf-Yk-bAC"/>
+                                    <action selector="settingsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rwr-R5-WNj"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fpq-OG-iCA">
@@ -196,7 +200,6 @@
                         <outlet property="constraintSearchBarToNavBar" destination="Slt-LG-yzr" id="XJq-Lw-cbx"/>
                         <outlet property="searchField" destination="G6y-Ua-bvW" id="ckd-te-Sk2"/>
                         <outlet property="tableView" destination="fpq-OG-iCA" id="kx9-0P-0zM"/>
-                        <segue destination="Dxv-20-Hbt" kind="custom" identifier="idCheckOuttoCheckInSegue" customClass="CheckOuttoCheckInSegue" customModule="Devices" customModuleProvider="target" id="ysQ-Ju-Wmm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -390,7 +393,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2s3-kc-Igt" kind="presentation" id="xrG-Lu-f0i"/>
+                                    <action selector="settingsPressed:" destination="Dxv-20-Hbt" eventType="touchUpInside" id="CFs-lA-XTM"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="r26-1b-Ztg">
@@ -443,7 +446,6 @@
                     <connections>
                         <outlet property="buttonCheckin" destination="jrA-i1-592" id="Odn-ez-8ln"/>
                         <outlet property="tableView" destination="r26-1b-Ztg" id="rau-9b-z3C"/>
-                        <segue destination="BYZ-38-t0r" kind="custom" identifier="idCheckIntoCheckOutSegue" customClass="CheckIntoCheckOutSegue" customModule="Devices" customModuleProvider="target" id="lX9-Jj-g7c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ade-ba-WBo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -459,9 +461,4 @@
         <image name="settings-icon.png" width="512" height="512"/>
         <image name="the_marauders_map_by_littlefallingstar-d5vf5do.png" width="1087" height="1266"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="lX9-Jj-g7c"/>
-        <segue reference="ysQ-Ju-Wmm"/>
-        <segue reference="xrG-Lu-f0i"/>
-    </inferredMetricsTieBreakers>
 </document>

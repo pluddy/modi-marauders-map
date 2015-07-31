@@ -37,6 +37,13 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
         }
     }
     
+    @IBAction func settingsPressed(sender: AnyObject) {
+        self.searchField.resignFirstResponder()
+        
+        let vc = ViewController.Settings.viewController(self.containerDelegate)
+        containerDelegate.switchToViewController(vc)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,6 +75,7 @@ class CheckoutViewController: UIViewController, UISearchBarDelegate, UITableView
     }
 
     override func viewWillDisappear(animated: Bool) {
+        self.showButton(false)
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     

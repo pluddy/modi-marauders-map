@@ -72,6 +72,7 @@ public extension UIDevice {
                 "iPhone6,2" : .iPhone5S,       // (model A1457, A1518, A1528 (China), A1530 | Global)
                 "iPad4,1"   : .iPadAir1,       // 5th Generation iPad (iPad Air) - Wifi
                 "iPad4,2"   : .iPadAir2,       // 5th Generation iPad (iPad Air) - Cellular
+                "iPad5,3"   : .iPadAir2,       // 5th Generation iPad (iPad Air) - Wifi
                 "iPad4,4"   : .iPadMini2,      // (2nd Generation iPad Mini - Wifi)
                 "iPad4,5"   : .iPadMini2,      // (2nd Generation iPad Mini - Cellular)
                 "iPhone7,1" : .iPhone6plus,    // All iPhone 6 Plus's

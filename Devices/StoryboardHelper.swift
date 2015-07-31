@@ -13,6 +13,7 @@ enum ViewController {
     case OnBoarding
     case CheckIn
     case CheckOut
+    case Settings
     
     func viewController(container: ContainerViewController) -> UIViewController {
         switch (self) {
@@ -26,6 +27,10 @@ enum ViewController {
             return vc
         case CheckOut:
             let vc = UIStoryboard.checkoutViewController()
+            vc.containerDelegate = container
+            return vc
+        case Settings:
+            let vc = UIStoryboard.settingsViewController()
             vc.containerDelegate = container
             return vc
         default:
