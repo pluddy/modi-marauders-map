@@ -10,6 +10,10 @@
 #define ObjCBridge_h
 
 #import <EstimoteSDK/EstimoteSDK.h>
+#import <Foundation/Foundation.h>
+
+FOUNDATION_EXPORT double AlamofireVersionNumber;
+FOUNDATION_EXPORT const unsigned char AlamofireVersionString[];
 
 
 #endif /* ObjCBridge_h */

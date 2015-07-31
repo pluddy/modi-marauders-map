@@ -4,7 +4,7 @@
 target 'Devices' do
 
     pod 'EstimoteSDK'
-
+    
 end
 
 target 'DevicesTests' do
