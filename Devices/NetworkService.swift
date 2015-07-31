@@ -126,15 +126,15 @@ class NetworkService {
     class func updateStatus() {
         let device = Device.sharedInstance
         let udid = device.getId()
-        let checkedOut = device.getStatus() == Checked.Out
+        let checkedOut = device.getStatus() == Checked.Out ? "true" : "false"
         let userId = device.getUser() != nil ? device.getUser()!.id : ""
         
         let params = [
-            "responseType": "json",
-            "udid": device.getId(),
-            "checkedOut": checkedOut,
-            "userId": userId
-        ] as [String : AnyObject]
+            ("responseType", "json"),
+//            "udid": device.getId(),
+            ("checkedOut", checkedOut),
+            ("userId", userId)
+        ] as [(String, String)]
         
         NetworkService.updateRemoteDevice(params)
     }
@@ -145,36 +145,46 @@ class NetworkService {
         let zone = device.getZone().rawValue
         
         let params = [
-            "responseType": "json",
-            "udid": device.getId(),
-            "zone": zone
-            ] as [String : AnyObject]
+            ("responseType", "json"),
+            //            "udid": device.getId(),
+            ("zone", zone)
+            ] as [(String, String)]
         
         NetworkService.updateRemoteDevice(params)
     }
     
     class func updateName() {
         let device = Device.sharedInstance
-        let name = device.getFullName()
+        let name = device.getFullName().stringByReplacingOccurrencesOfString(" ", withString: "%20", options: nil, range: nil)
         let udid = device.getId()
         
         let params = [
-            "responseType": "json",
-            "udid": device.getId(),
-            "name": name
-            ] as [String : AnyObject]
+            ("responseType", "json"),
+            //            "udid": device.getId(),
+            ("name", name)
+            ] as [(String, String)]
         
         NetworkService.updateRemoteDevice(params)
     }
     
-    class func updateRemoteDevice(params: [String : AnyObject]) {
+    class func updateRemoteDevice(params: [(String, String)]) {
         let device = Device.sharedInstance
 //        let zone = device.getZone().rawValue
 //        let udid = device.getId()
 //        let checkedOut = device.getStatus() == Checked.Out
 //        let userIdParam = (userId.isEmpty) ? (device.getUser() != nil ? device.getUser()!.id : nil) : userId
-//        
-        let postEndpoint = NetworkService.baseURL + "devices/\(device.getId())"
+//      
+        //http://104.131.19.33:4000/devices/5B4628C8-7551-4CF8-8E3C-5E1EC72A9552?userId=E1932B3F-AA85-43B9-9BBE-9644073DC93F&checkedOut=true
+        var postEndpoint = NetworkService.baseURL + "devices/\(device.getId())?"
+        
+        for (var i = 0; i < params.count; i++) {
+            if (i == params.count - 1) {
+                postEndpoint = postEndpoint + params[i].0 + "=" + params[i].1
+            }
+            else {
+                postEndpoint = postEndpoint + params[i].0 + "=" + params[i].1 + "&"
+            }
+        }
 //        let parameters = [
 //            "responseType": "json",
 //            "udid": device.getId(),
@@ -183,7 +193,7 @@ class NetworkService {
 //            "userId": userIdParam
 //            ] as [String : AnyObject]
         
-        request(.POST, postEndpoint, parameters: params, encoding: .JSON).responseJSON { (request, response, data, error) in
+        request(.POST, postEndpoint).responseJSON { (request, response, data, error) in
             if let anError = error {
                 println("error calling POST on /devices/")
                 println(anError)

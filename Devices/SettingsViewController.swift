@@ -16,6 +16,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var segmentedDeviceColor: UISegmentedControl!
     
     @IBAction func DismissSettings(sender: UIButton) {
+        NetworkService.updateName()
+        
         let vc = containerDelegate.checkinOrCheckout()
         containerDelegate.switchToViewController(vc)
     }
@@ -35,8 +37,6 @@ class SettingsViewController: UIViewController {
         default:
             break
         }
-        
-        NetworkService.updateName()
     }
     
     override func viewDidLoad() {
